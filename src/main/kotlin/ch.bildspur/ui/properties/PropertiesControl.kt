@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox
 import javafx.scene.text.Font
 import java.lang.reflect.Field
 
+@Suppress("UNCHECKED_CAST")
 class PropertiesControl : VBox() {
     val propertyChanged = Event<BaseProperty>()
 

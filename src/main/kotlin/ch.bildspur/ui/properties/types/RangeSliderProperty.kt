@@ -17,6 +17,7 @@ class RangeSliderProperty(field: Field, obj: Any, val annotation: RangeSliderPar
     private val valueLabel = Label()
 
     val digits = if (annotation.roundInt) 0 else 2
+    private var setupPreventCounter = 2
 
     init {
         slider.majorTickUnit = annotation.majorTick
@@ -44,14 +45,22 @@ class RangeSliderProperty(field: Field, obj: Any, val annotation: RangeSliderPar
         slider.lowValueProperty().addListener { _, _, _ ->
             run {
                 model.value = NumberRange(slider.lowValue, model.value.high)
-                propertyChanged(this)
+
+                if(setupPreventCounter == 0)
+                    propertyChanged(this)
+                else
+                    setupPreventCounter--
             }
         }
 
         slider.highValueProperty().addListener { _, _, _ ->
             run {
                 model.value = NumberRange(model.value.low, slider.highValue)
-                propertyChanged(this)
+
+                if(setupPreventCounter == 0)
+                    propertyChanged(this)
+                else
+                    setupPreventCounter--
             }
         }
     }
