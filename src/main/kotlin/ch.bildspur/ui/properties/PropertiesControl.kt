@@ -19,7 +19,7 @@ class PropertiesControl : VBox() {
         padding = Insets(10.0, 20.0, 10.0, 10.0)
 
         // register base annotations
-        BaseAnnotation
+        PropertyAnnotation
     }
 
     fun initView(obj: Any) {

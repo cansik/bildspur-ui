@@ -6,10 +6,8 @@ import javafx.application.Platform
 import javafx.scene.control.ComboBox
 import java.lang.reflect.Field
 
-
 @Suppress("UNCHECKED_CAST")
 class EnumProperty(field: Field, obj: Any, val annotation: EnumParameter) : BaseProperty(field, obj) {
-
     val box = ComboBox<Enum<*>>()
 
     init {
@@ -35,7 +33,10 @@ class EnumProperty(field: Field, obj: Any, val annotation: EnumParameter) : Base
 
         box.setOnAction {
             model.value = box.selectionModel.selectedItem
-            propertyChanged(this)
+
+            preventFirstTime {
+                propertyChanged(this)
+            }
         }
 
         box.prefWidth = 170.0

@@ -2,6 +2,7 @@ package ch.bildspur.ui.properties.types
 
 import ch.bildspur.ui.properties.ActionParameter
 import javafx.application.Platform
+import javafx.scene.Cursor
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressIndicator
@@ -33,6 +34,9 @@ class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : 
             errorText.isVisible = false
             button.isDisable = true
 
+            val storedCursor = cursor
+            cursor = Cursor.WAIT
+
             thread {
                 try {
                     block()
@@ -41,6 +45,7 @@ class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : 
                     errorText.text = "${ex.message}"
                 } finally {
                     Platform.runLater {
+                        cursor = storedCursor
                         button.isDisable = false
                         progress.isVisible = false
                         if (annotation.invokesChange)

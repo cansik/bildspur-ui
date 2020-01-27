@@ -54,7 +54,10 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : 
 
                 if (model.value is Double)
                     model.value = slider.value
-                propertyChanged(this)
+
+                preventFirstTime {
+                    propertyChanged(this)
+                }
             }
         }
     }

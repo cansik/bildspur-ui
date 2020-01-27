@@ -58,7 +58,7 @@ annotation class EnumParameter(val name: String)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class LabelParameter(val name: String)
 
-object BaseAnnotation {
+object PropertyAnnotation {
     init {
         val properties = PropertiesRegistry.properties
 
