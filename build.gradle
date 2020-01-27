@@ -35,9 +35,13 @@ dependencies {
     implementation "com.github.cansik:bildspur-base:${version}"
 
     // javafx
-    compile group: 'org.openjfx', name: 'javafx-base', version: '11.0.2'
-    compile group: 'org.openjfx', name: 'javafx-controls', version: '11.0.2'
-    compile group: 'org.controlsfx', name: 'controlsfx', version: '11.0.0'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: '11.0.2'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: '11.0.2'
+    implementation group: 'org.controlsfx', name: 'controlsfx', version: '11.0.0'
+
+    // are they really needed?
+    testCompile 'com.google.code.gson:gson:2.8.6'
+    testCompile 'com.github.salomonbrys.kotson:kotson:2.5.0'
 }
 
 configurations {
