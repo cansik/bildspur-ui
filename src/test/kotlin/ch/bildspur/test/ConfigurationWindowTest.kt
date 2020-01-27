@@ -7,7 +7,6 @@ import ch.bildspur.ui.properties.StringParameter
 import com.google.gson.annotations.Expose
 import javafx.application.Platform
 import javafx.stage.Stage
-import org.junit.Test
 
 fun main() {
     ConfigurationWindowTest().runConfigWindow()

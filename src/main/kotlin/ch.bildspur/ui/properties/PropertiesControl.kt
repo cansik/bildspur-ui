@@ -11,13 +11,15 @@ import javafx.scene.text.Font
 import java.lang.reflect.Field
 
 class PropertiesControl : VBox() {
-
     val propertyChanged = Event<BaseProperty>()
 
     init {
         spacing = 10.0
         alignment = Pos.TOP_CENTER
         padding = Insets(10.0, 20.0, 10.0, 10.0)
+
+        // register base annotations
+        BaseAnnotation
     }
 
     fun initView(obj: Any) {
@@ -27,54 +29,15 @@ class PropertiesControl : VBox() {
 
         // create view
         params.forEach {
-            if (it.isAnnotationPresent(StringParameter::class.java)) {
-                val annotation = it.getAnnotation(StringParameter::class.java)
-                addProperty(annotation.name, StringProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(NumberParameter::class.java)) {
-                val annotation = it.getAnnotation(NumberParameter::class.java)
-                addProperty(annotation.name, NumberProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(SliderParameter::class.java)) {
-                val annotation = it.getAnnotation(SliderParameter::class.java)
-                addProperty(annotation.name, SliderProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(BooleanParameter::class.java)) {
-                val annotation = it.getAnnotation(BooleanParameter::class.java)
-                addProperty(annotation.name, BooleanProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(ActionParameter::class.java)) {
-                val annotation = it.getAnnotation(ActionParameter::class.java)
-                addProperty(annotation.name, ActionProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(EnumParameter::class.java)) {
-                val annotation = it.getAnnotation(EnumParameter::class.java)
-                addProperty(annotation.name, EnumProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(RangeSliderParameter::class.java)) {
-                val annotation = it.getAnnotation(RangeSliderParameter::class.java)
-                addProperty(annotation.name, RangeSliderProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(TextParameter::class.java)) {
-                val annotation = it.getAnnotation(TextParameter::class.java)
-                addProperty(annotation.name, TextProperty(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(Float2Parameter::class.java)) {
-                val annotation = it.getAnnotation(Float2Parameter::class.java)
-                addProperty(annotation.name, Float2Property(it, obj, annotation))
-            }
-
-            if (it.isAnnotationPresent(Float3Parameter::class.java)) {
-                val annotation = it.getAnnotation(Float3Parameter::class.java)
-                addProperty(annotation.name, Float3Property(it, obj, annotation))
+            for(property in PropertiesRegistry.properties) {
+                property as PropertiesRegistryEntry<Annotation>
+                if(it.isAnnotationPresent(property.annotation)) {
+                    val annotation = it.getAnnotation(property.annotation)!!
+                    val name = property.getName(annotation)
+                    val propertyControl = property.getPropertyControl(it, obj, annotation)
+                    addProperty(name, propertyControl)
+                    break
+                }
             }
 
             if (it.isAnnotationPresent(LabelParameter::class.java)) {
@@ -113,18 +76,13 @@ class PropertiesControl : VBox() {
         val c = obj.javaClass
 
         val fields = c.declaredFields.filter {
-            it.isAnnotationPresent(SliderParameter::class.java) ||
-                    it.isAnnotationPresent(StringParameter::class.java) ||
-                    it.isAnnotationPresent(BooleanParameter::class.java) ||
-                    it.isAnnotationPresent(NumberParameter::class.java) ||
-                    it.isAnnotationPresent(ActionParameter::class.java) ||
-                    it.isAnnotationPresent(EnumParameter::class.java) ||
-                    it.isAnnotationPresent(LabelParameter::class.java) ||
-                    it.isAnnotationPresent(TextParameter::class.java) ||
-                    it.isAnnotationPresent(Float2Parameter::class.java) ||
-                    it.isAnnotationPresent(Float3Parameter::class.java) ||
-                    it.isAnnotationPresent(RangeSliderParameter::class.java)
-
+            for(property in PropertiesRegistry.properties) {
+                property as PropertiesRegistryEntry<Annotation>
+                if (it.isAnnotationPresent(property.annotation)) {
+                    return@filter true
+                }
+            }
+            return@filter false
         }
         fields.forEach { it.isAccessible = true }
         return fields
