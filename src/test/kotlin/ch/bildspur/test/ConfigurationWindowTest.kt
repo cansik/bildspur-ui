@@ -51,7 +51,11 @@ class ConfigurationWindowTest {
 
         @Expose
         @ActionParameter("Task", "Run")
-        var task = {println("running...")}
+        var task = {
+            println("running...")
+            Thread.sleep(500)
+            println("done!")
+        }
 
         @Expose
         @EnumParameter("Gender")

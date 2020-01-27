@@ -35,14 +35,16 @@ class PropertiesControl : VBox() {
                     val annotation = it.getAnnotation(property.annotation)!!
                     val name = property.getName(annotation)
                     val propertyControl = property.getPropertyControl(it, obj, annotation)
+
+                    // label exception (todo: create specific types)
+                    if(propertyControl is LabelProperty) {
+                        addLabel(propertyControl)
+                        break
+                    }
+
                     addProperty(name, propertyControl)
                     break
                 }
-            }
-
-            if (it.isAnnotationPresent(LabelParameter::class.java)) {
-                val annotation = it.getAnnotation(LabelParameter::class.java)
-                addLabel(LabelProperty(it, obj, annotation))
             }
         }
     }
