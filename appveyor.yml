@@ -8,8 +8,8 @@ environment:
     CYG_MIRROR: http://mirrors.kernel.org/sourceware/cygwin/
     CYG_ARCH: x86
   matrix:
-    - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
-    - JAVA_HOME: C:\Program Files (x86)\Java\jdk1.8.0
+    - JAVA_HOME: C:\Program Files\Java\jdk11
+    - JAVA_HOME: C:\Program Files (x86)\Java\jdk11
 
 init:
   - 'echo System architecture: %PLATFORM%'
