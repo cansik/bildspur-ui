@@ -36,6 +36,10 @@ annotation class NumberParameter(val name: String, val unit : String = "")
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
+annotation class ProgressParameter(val name: String, val displayValue : Boolean = true)
+
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class BooleanParameter(val name: String)
 
 @Target(AnnotationTarget.FIELD)
@@ -71,6 +75,7 @@ object PropertyAnnotation {
         properties.add(PropertiesRegistryEntry(SliderParameter::class.java, SliderParameter::name, ::SliderProperty))
         properties.add(PropertiesRegistryEntry(RangeSliderParameter::class.java, RangeSliderParameter::name, ::RangeSliderProperty))
         properties.add(PropertiesRegistryEntry(NumberParameter::class.java, NumberParameter::name, ::NumberProperty))
+        properties.add(PropertiesRegistryEntry(ProgressParameter::class.java, ProgressParameter::name, ::ProgressProperty))
         properties.add(PropertiesRegistryEntry(BooleanParameter::class.java, BooleanParameter::name, ::BooleanProperty))
         properties.add(PropertiesRegistryEntry(Float2Parameter::class.java, Float2Parameter::name, ::Float2Property))
         properties.add(PropertiesRegistryEntry(Float3Parameter::class.java, Float3Parameter::name, ::Float3Property))

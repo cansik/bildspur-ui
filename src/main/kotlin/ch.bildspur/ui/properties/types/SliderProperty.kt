@@ -1,6 +1,7 @@
 package ch.bildspur.ui.properties.types
 
 import ch.bildspur.model.DataModel
+import ch.bildspur.ui.PropertyUtils
 import ch.bildspur.ui.properties.SliderParameter
 import ch.bildspur.util.format
 import javafx.application.Platform
@@ -43,17 +44,7 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : 
 
         slider.valueProperty().addListener { _, _, _ ->
             run {
-                if (model.value is Int)
-                    model.value = slider.value.roundToInt()
-
-                if (model.value is Long)
-                    model.value = slider.value.roundToLong()
-
-                if (model.value is Float)
-                    model.value = slider.value.toFloat()
-
-                if (model.value is Double)
-                    model.value = slider.value
+                PropertyUtils.setDoubleToNumberModel(slider.value, model)
 
                 preventFirstTime {
                     propertyChanged(this)

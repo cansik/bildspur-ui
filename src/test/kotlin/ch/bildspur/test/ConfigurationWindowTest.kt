@@ -42,6 +42,10 @@ class ConfigurationWindowTest {
         var humidty = DataModel(80.0)
 
         @Expose
+        @ProgressParameter("Progress")
+        var progress = DataModel(0.647327)
+
+        @Expose
         @BooleanParameter("Heating")
         var heating = DataModel(true)
 

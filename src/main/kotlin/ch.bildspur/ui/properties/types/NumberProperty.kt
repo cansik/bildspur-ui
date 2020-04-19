@@ -2,6 +2,7 @@ package ch.bildspur.ui.properties.types
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.NumberField
+import ch.bildspur.ui.PropertyUtils
 import ch.bildspur.ui.properties.NumberParameter
 import javafx.application.Platform
 import javafx.geometry.Pos
@@ -27,7 +28,7 @@ class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : 
 
     init {
         format.isGroupingUsed = false
-        unitField.font = Font("Helvetica", 8.0)
+        unitField.font = Font("Helvetica", 10.0)
 
         box.spacing = 10.0
         box.alignment = Pos.CENTER_LEFT
@@ -42,17 +43,7 @@ class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : 
         model.fireLatest()
 
         numberField.setOnAction {
-            if (model.value is Short)
-                model.value = numberField.value.toShort()
-
-            if (model.value is Int)
-                model.value = numberField.value.toInt()
-
-            if (model.value is Float)
-                model.value = numberField.value.toFloat()
-
-            if (model.value is Double)
-                model.value = numberField.value
+            PropertyUtils.setDoubleToNumberModel(numberField.value, model)
             propertyChanged(this)
         }
     }

@@ -1,6 +1,5 @@
 package ch.bildspur.ui.properties
 
-import ch.bildspur.ui.properties.types.BaseFieldProperty
 import ch.bildspur.ui.properties.types.BaseProperty
 import java.lang.reflect.Field
 
