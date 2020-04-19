@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class TextProperty(field: Field, obj: Any, val annotation: TextParameter) : BaseProperty(field, obj) {
+class TextProperty(field: Field, obj: Any, val annotation: TextParameter) : BaseFieldProperty(field, obj) {
 
     val textArea = TextArea()
     val submitButton = Button("Submit")

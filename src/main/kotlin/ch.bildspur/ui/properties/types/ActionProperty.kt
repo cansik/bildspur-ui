@@ -13,7 +13,7 @@ import java.lang.reflect.Field
 import kotlin.concurrent.thread
 
 @Suppress("UNCHECKED_CAST")
-class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : BaseProperty(field, obj) {
+class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : BaseFieldProperty(field, obj) {
     val button = Button()
     val progress = ProgressIndicator()
     val errorText = Label()

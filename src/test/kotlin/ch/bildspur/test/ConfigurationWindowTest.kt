@@ -15,6 +15,10 @@ fun main() {
     ConfigurationWindowTest().runConfigWindow()
 }
 
+data class Color(@Expose @SliderParameter("Red", 0.0, 1.0, 0.1) var red : DataModel<Float>,
+                 @Expose @SliderParameter("Green", 0.0, 1.0, 0.1) var green : DataModel<Float>,
+                 @Expose @SliderParameter("Blue", 0.0, 1.0, 0.1) var blue : DataModel<Float>)
+
 class ConfigurationWindowTest {
     enum class Gender {
         Male, Female, Other
@@ -64,6 +68,10 @@ class ConfigurationWindowTest {
         @Expose
         @LabelParameter("Test")
         val label = Any()
+
+        @Expose
+        @GroupParameter("RGB")
+        val rgb = Color(DataModel(0.5f), DataModel(0.3f), DataModel(0.8f))
     }
 
     fun runConfigWindow() {

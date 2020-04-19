@@ -7,7 +7,7 @@ import javafx.scene.control.CheckBox
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class BooleanProperty(field: Field, obj: Any, val annoation: BooleanParameter) : BaseProperty(field, obj) {
+class BooleanProperty(field: Field, obj: Any, val annoation: BooleanParameter) : BaseFieldProperty(field, obj) {
 
     val checkBox = CheckBox()
 

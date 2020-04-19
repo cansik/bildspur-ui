@@ -14,7 +14,7 @@ import java.lang.reflect.Field
 import java.text.NumberFormat
 import java.util.*
 
-class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : BaseProperty(field, obj) {
+class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : BaseFieldProperty(field, obj) {
 
     val format = NumberFormat.getInstance(Locale.ENGLISH)
     val numberStringConverter = NumberStringConverter(format)

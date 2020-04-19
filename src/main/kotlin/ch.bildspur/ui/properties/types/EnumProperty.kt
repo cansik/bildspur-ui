@@ -7,7 +7,7 @@ import javafx.scene.control.ComboBox
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class EnumProperty(field: Field, obj: Any, val annotation: EnumParameter) : BaseProperty(field, obj) {
+class EnumProperty(field: Field, obj: Any, val annotation: EnumParameter) : BaseFieldProperty(field, obj) {
     val box = ComboBox<Enum<*>>()
 
     init {

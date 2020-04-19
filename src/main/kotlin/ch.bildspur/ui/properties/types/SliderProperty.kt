@@ -12,7 +12,7 @@ import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
 @Suppress("UNCHECKED_CAST")
-class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : BaseProperty(field, obj) {
+class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : BaseFieldProperty(field, obj) {
     private val slider = Slider(annotation.minValue, annotation.maxValue, 0.0)
     private val valueLabel = Label()
 

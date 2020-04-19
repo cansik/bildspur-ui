@@ -13,7 +13,7 @@ import javafx.util.converter.FloatStringConverter
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class Float3Property(field: Field, obj: Any, val annotation: Float3Parameter) : BaseProperty(field, obj) {
+class Float3Property(field: Field, obj: Any, val annotation: Float3Parameter) : BaseFieldProperty(field, obj) {
 
     val model = field.get(obj) as DataModel<Float3>
     val xField = NumberField<Float>(TextFormatter(FloatStringConverter()))

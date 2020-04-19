@@ -37,9 +37,9 @@ class PropertiesControl : VBox() {
                     val name = property.getName(annotation)
                     val propertyControl = property.getPropertyControl(it, obj, annotation)
 
-                    // label exception (todo: create specific types)
-                    if(propertyControl is LabelProperty) {
-                        addLabel(propertyControl)
+                    // component exception
+                    if(propertyControl is PropertyComponent) {
+                        addComponent(propertyControl)
                         break
                     }
 
@@ -54,7 +54,7 @@ class PropertiesControl : VBox() {
         this.children.clear()
     }
 
-    private fun addLabel(propertyView: BaseProperty) {
+    private fun addComponent(propertyView: BaseProperty) {
         children.add(propertyView)
     }
 

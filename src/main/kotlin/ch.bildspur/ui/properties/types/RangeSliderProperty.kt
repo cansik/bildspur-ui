@@ -12,7 +12,7 @@ import org.controlsfx.control.RangeSlider
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class RangeSliderProperty(field: Field, obj: Any, val annotation: RangeSliderParameter) : BaseProperty(field, obj) {
+class RangeSliderProperty(field: Field, obj: Any, val annotation: RangeSliderParameter) : BaseFieldProperty(field, obj) {
     private val slider = RangeSlider(annotation.minValue, annotation.maxValue, annotation.minValue, annotation.maxValue)
     private val valueLabel = Label()
 

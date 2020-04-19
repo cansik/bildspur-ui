@@ -7,7 +7,7 @@ import javafx.scene.text.Font
 import javafx.scene.text.FontWeight
 import java.lang.reflect.Field
 
-class LabelProperty (field: Field, obj: Any, private val annoation: LabelParameter) : BaseProperty(field, obj) {
+class LabelProperty (field: Field, obj: Any, private val annoation: LabelParameter) : BaseFieldProperty(field, obj), PropertyComponent {
     private val label = Label(annoation.name)
 
     init {

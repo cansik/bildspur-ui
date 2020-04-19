@@ -58,6 +58,10 @@ annotation class EnumParameter(val name: String)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class LabelParameter(val name: String)
 
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class GroupParameter(val name: String)
+
 object PropertyAnnotation {
     init {
         val properties = PropertiesRegistry.properties
@@ -74,5 +78,6 @@ object PropertyAnnotation {
         properties.add(PropertiesRegistryEntry(EnumParameter::class.java, EnumParameter::name, ::EnumProperty))
 
         properties.add(PropertiesRegistryEntry(LabelParameter::class.java, LabelParameter::name, ::LabelProperty))
+        properties.add(PropertiesRegistryEntry(GroupParameter::class.java, GroupParameter::name, ::GroupProperty))
     }
 }

@@ -13,7 +13,7 @@ import javafx.util.converter.FloatStringConverter
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class Float2Property(field: Field, obj: Any, val annotation: Float2Parameter) : BaseProperty(field, obj) {
+class Float2Property(field: Field, obj: Any, val annotation: Float2Parameter) : BaseFieldProperty(field, obj) {
 
     val model = field.get(obj) as DataModel<Float2>
     val xField = NumberField<Float>(TextFormatter(FloatStringConverter()))
