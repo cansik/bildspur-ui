@@ -15,6 +15,8 @@ class GroupProperty (field : Field, obj: Any, private val annoation: GroupParame
     private val titledPane = TitledPane(annoation.name, control)
 
     init {
+        titledPane.isExpanded = annoation.expanded
+        titledPane.isCollapsible = annoation.collapsible
         titledPane.font = Font.font("Helvetica", FontWeight.BOLD, 14.0)
         children.add(titledPane)
 

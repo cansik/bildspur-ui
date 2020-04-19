@@ -60,7 +60,7 @@ annotation class LabelParameter(val name: String)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class GroupParameter(val name: String)
+annotation class GroupParameter(val name: String, val expanded : Boolean = true, val collapsible : Boolean = true)
 
 object PropertyAnnotation {
     init {

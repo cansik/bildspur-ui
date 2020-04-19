@@ -46,6 +46,10 @@ class ConfigurationWindowTest {
         var heating = DataModel(true)
 
         @Expose
+        @GroupParameter("Color")
+        val rgb = Color(DataModel(0.5f), DataModel(0.3f), DataModel(0.8f))
+
+        @Expose
         @Float2Parameter("Position")
         var position = DataModel(Float2(20f, 50f))
 
@@ -68,10 +72,6 @@ class ConfigurationWindowTest {
         @Expose
         @LabelParameter("Test")
         val label = Any()
-
-        @Expose
-        @GroupParameter("RGB")
-        val rgb = Color(DataModel(0.5f), DataModel(0.3f), DataModel(0.8f))
     }
 
     fun runConfigWindow() {
