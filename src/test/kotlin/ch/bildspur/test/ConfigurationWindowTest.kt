@@ -1,5 +1,6 @@
 package ch.bildspur.test
 
+import ch.bildspur.color.RGB
 import ch.bildspur.configuration.ConfigurationController
 import ch.bildspur.math.Float2
 import ch.bildspur.math.Float3
@@ -15,9 +16,9 @@ fun main() {
     ConfigurationWindowTest().runConfigWindow()
 }
 
-data class Color(@Expose @SliderParameter("Red", 0.0, 1.0, 0.1) var red : DataModel<Float>,
-                 @Expose @SliderParameter("Green", 0.0, 1.0, 0.1) var green : DataModel<Float>,
-                 @Expose @SliderParameter("Blue", 0.0, 1.0, 0.1) var blue : DataModel<Float>)
+data class MyColor(@Expose @SliderParameter("Red", 0.0, 1.0, 0.1) var red : DataModel<Float>,
+                   @Expose @SliderParameter("Green", 0.0, 1.0, 0.1) var green : DataModel<Float>,
+                   @Expose @SliderParameter("Blue", 0.0, 1.0, 0.1) var blue : DataModel<Float>)
 
 class ConfigurationWindowTest {
     enum class Gender {
@@ -50,8 +51,12 @@ class ConfigurationWindowTest {
         var heating = DataModel(true)
 
         @Expose
+        @ColorParameter("Sunset")
+        var colorParameter = DataModel(RGB(0.2, 0.3, 0.1, 1.0))
+
+        @Expose
         @GroupParameter("Color")
-        val rgb = Color(DataModel(0.5f), DataModel(0.3f), DataModel(0.8f))
+        val rgb = MyColor(DataModel(0.5f), DataModel(0.3f), DataModel(0.8f))
 
         @Expose
         @Float2Parameter("Position")

@@ -4,7 +4,7 @@ import ch.bildspur.model.DataModel
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
-object PropertyUtils {
+object JavaFXUtils {
     fun setDoubleToNumberModel(value : Double, model : DataModel<Number>) {
         if(model.value is Byte)
             model.value = value.toByte()

@@ -2,7 +2,7 @@ package ch.bildspur.ui.properties.types
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.NumberField
-import ch.bildspur.ui.PropertyUtils
+import ch.bildspur.ui.JavaFXUtils
 import ch.bildspur.ui.properties.NumberParameter
 import javafx.application.Platform
 import javafx.geometry.Pos
@@ -43,7 +43,7 @@ class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : 
         model.fireLatest()
 
         numberField.setOnAction {
-            PropertyUtils.setDoubleToNumberModel(numberField.value, model)
+            JavaFXUtils.setDoubleToNumberModel(numberField.value, model)
             propertyChanged(this)
         }
     }

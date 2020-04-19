@@ -9,6 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation "com.github.cansik:bildspur-ui:0.1.0"
+    implementation "com.github.cansik:bildspur-ui:0.2.0"
 }
 ```

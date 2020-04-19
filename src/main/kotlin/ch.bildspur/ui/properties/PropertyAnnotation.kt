@@ -60,6 +60,10 @@ annotation class EnumParameter(val name: String)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
+annotation class ColorParameter(val name: String)
+
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class LabelParameter(val name: String)
 
 @Target(AnnotationTarget.FIELD)
@@ -81,6 +85,7 @@ object PropertyAnnotation {
         properties.add(PropertiesRegistryEntry(Float3Parameter::class.java, Float3Parameter::name, ::Float3Property))
         properties.add(PropertiesRegistryEntry(ActionParameter::class.java, ActionParameter::name, ::ActionProperty))
         properties.add(PropertiesRegistryEntry(EnumParameter::class.java, EnumParameter::name, ::EnumProperty))
+        properties.add(PropertiesRegistryEntry(ColorParameter::class.java, ColorParameter::name, ::ColorProperty))
 
         properties.add(PropertiesRegistryEntry(LabelParameter::class.java, LabelParameter::name, ::LabelProperty))
         properties.add(PropertiesRegistryEntry(GroupParameter::class.java, GroupParameter::name, ::GroupProperty))

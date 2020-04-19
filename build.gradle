@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'ch.bildspur'
-version '0.1.2'
+version '0.2.0'
 
 def String name = 'bildspur-ui'
 sourceCompatibility = 1.8
@@ -32,7 +32,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     // base
-    implementation "com.github.cansik:bildspur-base:0.1.0"
+    implementation "com.github.cansik:bildspur-base:0.2.0"
 
     // javafx
     implementation group: 'org.openjfx', name: 'javafx-base', version: '11.0.2'

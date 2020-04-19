@@ -1,7 +1,7 @@
 package ch.bildspur.ui.properties.types
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.PropertyUtils
+import ch.bildspur.ui.JavaFXUtils
 import ch.bildspur.ui.properties.SliderParameter
 import ch.bildspur.util.format
 import javafx.application.Platform
@@ -9,8 +9,6 @@ import javafx.scene.control.Label
 import javafx.scene.control.Slider
 import javafx.scene.layout.HBox
 import java.lang.reflect.Field
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 @Suppress("UNCHECKED_CAST")
 class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : BaseFieldProperty(field, obj) {
@@ -44,7 +42,7 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : 
 
         slider.valueProperty().addListener { _, _, _ ->
             run {
-                PropertyUtils.setDoubleToNumberModel(slider.value, model)
+                JavaFXUtils.setDoubleToNumberModel(slider.value, model)
 
                 preventFirstTime {
                     propertyChanged(this)
