@@ -3,7 +3,6 @@ package ch.bildspur.ui
 import ch.bildspur.configuration.ConfigurationController
 import ch.bildspur.ui.properties.PropertiesControl
 import javafx.application.Application
-import javafx.application.Platform
 import javafx.geometry.Insets
 import javafx.scene.Scene
 import javafx.scene.control.Button
@@ -14,12 +13,8 @@ import javafx.scene.layout.Pane
 import javafx.stage.Screen
 import javafx.stage.Stage
 
-class ConfigurationWindow(val configController : ConfigurationController, val title : String, vararg val configurations : Any) : Application() {
+class ConfigurationWindow(val configController : ConfigurationController, val title : String, val rootConfiguration: Any) : Application() {
     private val propertiesControl = PropertiesControl()
-
-    init {
-        assert(configurations.isNotEmpty()) { "At least one configuration is needed." }
-    }
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = title
@@ -33,6 +28,7 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
         primaryStage.setOnCloseRequest {
         }
 
+        // move to the right side of the screen
         val primScreenBounds = Screen.getPrimary().visualBounds
         primaryStage.x = primScreenBounds.width / 8.0 * 7.0
 
@@ -40,19 +36,17 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
     }
 
     private fun createUI(primaryStage: Stage) : Pane {
-        val mainConfig = configurations.first()
-
         // general components
         val saveButton = Button("Save")
         saveButton.setOnAction {
-            configController.saveAppConfig(mainConfig)
+            configController.saveAppConfig(rootConfiguration)
             println("config saved!")
             saveButton.style = "-fx-text-fill: #000000"
             primaryStage.title = title
         }
         saveButton.style = "-fx-text-fill: #000000"
 
-        propertiesControl.initView(mainConfig)
+        propertiesControl.initView(rootConfiguration)
         propertiesControl.propertyChanged += {
             primaryStage.title = "$title*"
             saveButton.style = "-fx-text-fill: #ff7675"
@@ -63,6 +57,9 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
 
         val top = HBox(saveButton, spacerButton)
 
+        val configurations = getAllAppConfigurations(rootConfiguration)
+        configurations.add(0, rootConfiguration)
+
         // create configuration buttons
         val settings = configurations.map {
             val annotation = it.javaClass.getAnnotation(AppConfiguration::class.java)
@@ -70,7 +67,7 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
         }
 
         settings.forEach { (annotation, cfg) ->
-            val button = Button(annotation?.name)
+            val button = Button(annotation?.name ?: cfg.javaClass.name)
             button.setOnAction { propertiesControl.initView(cfg) }
             button.style = "-fx-font-size: 1em;"
             top.children.add(button)
@@ -83,5 +80,22 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
         top.padding = Insets(10.0)
         top.spacing = 5.0
         return BorderPane(ScrollPane(propertiesControl), top, null, null, null)
+    }
+
+    private fun getAllAppConfigurations(root : Any) : MutableList<Any> {
+        val configurations = root.javaClass.declaredFields.filter {
+            it.type.isAnnotationPresent(AppConfiguration::class.java)
+        }.map {
+            it.trySetAccessible()
+            it.get(root)
+        }.toMutableList()
+
+        val subConfigurations = configurations.flatMap {
+            getAllAppConfigurations(it)
+        }
+
+        configurations.addAll(subConfigurations)
+
+        return configurations
     }
 }

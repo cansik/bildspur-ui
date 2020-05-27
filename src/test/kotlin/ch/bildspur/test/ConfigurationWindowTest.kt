@@ -28,6 +28,10 @@ class ConfigurationWindowTest {
 
     @AppConfiguration("Test")
     class AppConfig {
+
+        @Expose
+        var subConfig = SubConfig()
+
         @Expose
         @StringParameter("Name")
         var name = DataModel("bildspur")
@@ -82,6 +86,23 @@ class ConfigurationWindowTest {
 
         @Expose
         @LabelParameter("Test")
+        val label = Any()
+    }
+
+    @AppConfiguration("Light")
+    class SubConfig {
+        @Expose
+        var dmx = DMXConfig()
+
+        @Expose
+        @LabelParameter("Sub Config Label")
+        val label = Any()
+    }
+
+    @AppConfiguration("DMX")
+    class DMXConfig {
+        @Expose
+        @LabelParameter("DMX Test")
         val label = Any()
     }
 
