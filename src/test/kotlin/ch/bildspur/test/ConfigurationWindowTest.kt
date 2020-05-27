@@ -6,6 +6,7 @@ import ch.bildspur.math.Float2
 import ch.bildspur.math.Float3
 import ch.bildspur.model.DataModel
 import ch.bildspur.model.NumberRange
+import ch.bildspur.ui.AppConfiguration
 import ch.bildspur.ui.ConfigurationWindow
 import ch.bildspur.ui.properties.*
 import com.google.gson.annotations.Expose
@@ -25,6 +26,7 @@ class ConfigurationWindowTest {
         Male, Female, Other
     }
 
+    @AppConfiguration("Test")
     class AppConfig {
         @Expose
         @StringParameter("Name")
@@ -86,7 +88,7 @@ class ConfigurationWindowTest {
     fun runConfigWindow() {
         Platform.startup {
             val controller = ConfigurationController("CWT", "bildspur", "test")
-            val window = ConfigurationWindow(controller, AppConfig(), "CWT")
+            val window = ConfigurationWindow(controller, "CWT", AppConfig())
             window.start(Stage())
         }
     }

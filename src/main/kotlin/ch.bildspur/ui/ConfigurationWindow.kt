@@ -14,8 +14,12 @@ import javafx.scene.layout.Pane
 import javafx.stage.Screen
 import javafx.stage.Stage
 
-class ConfigurationWindow(val configController : ConfigurationController, val config : Any, val title : String) : Application() {
+class ConfigurationWindow(val configController : ConfigurationController, val title : String, vararg val configurations : Any) : Application() {
     private val propertiesControl = PropertiesControl()
+
+    init {
+        assert(configurations.isNotEmpty()) { "At least one configuration is needed." }
+    }
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = title
@@ -36,17 +40,19 @@ class ConfigurationWindow(val configController : ConfigurationController, val co
     }
 
     private fun createUI(primaryStage: Stage) : Pane {
-        // components
+        val mainConfig = configurations.first()
+
+        // general components
         val saveButton = Button("Save")
         saveButton.setOnAction {
-            configController.saveAppConfig(config)
+            configController.saveAppConfig(mainConfig)
             println("config saved!")
             saveButton.style = "-fx-text-fill: #000000"
             primaryStage.title = title
         }
         saveButton.style = "-fx-text-fill: #000000"
 
-        propertiesControl.initView(config)
+        propertiesControl.initView(mainConfig)
         propertiesControl.propertyChanged += {
             primaryStage.title = "$title*"
             saveButton.style = "-fx-text-fill: #ff7675"
@@ -57,12 +63,14 @@ class ConfigurationWindow(val configController : ConfigurationController, val co
 
         val top = HBox(saveButton, spacerButton)
 
-        val settings = mapOf(
-            "General" to config
-            )
+        // create configuration buttons
+        val settings = configurations.map {
+            val annotation = it.javaClass.getAnnotation(AppConfiguration::class.java)
+            annotation to it
+        }
 
-        settings.forEach { (name, cfg) ->
-            val button = Button(name)
+        settings.forEach { (annotation, cfg) ->
+            val button = Button(annotation?.name)
             button.setOnAction { propertiesControl.initView(cfg) }
             button.style = "-fx-font-size: 1em;"
             top.children.add(button)

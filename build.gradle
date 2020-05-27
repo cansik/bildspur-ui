@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'ch.bildspur'
-version '0.2.0'
+version '0.3.0'
 
 def String name = 'bildspur-ui'
 sourceCompatibility = 1.8
