@@ -1,4 +1,4 @@
-package ch.bildspur.ui
+package ch.bildspur.ui.fx
 
 import ch.bildspur.model.DataModel
 import kotlin.math.roundToInt

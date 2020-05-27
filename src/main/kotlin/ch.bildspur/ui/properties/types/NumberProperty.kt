@@ -1,8 +1,8 @@
 package ch.bildspur.ui.properties.types
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.NumberField
-import ch.bildspur.ui.JavaFXUtils
+import ch.bildspur.ui.controls.NumberField
+import ch.bildspur.ui.fx.JavaFXUtils
 import ch.bildspur.ui.properties.NumberParameter
 import javafx.application.Platform
 import javafx.geometry.Pos

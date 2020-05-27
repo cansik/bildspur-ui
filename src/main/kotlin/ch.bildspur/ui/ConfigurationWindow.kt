@@ -1,7 +1,7 @@
 package ch.bildspur.ui
 
 import ch.bildspur.configuration.ConfigurationController
-import ch.bildspur.ui.fx.ClickableMenu
+import ch.bildspur.ui.controls.ClickableMenu
 import ch.bildspur.ui.properties.PropertiesControl
 import javafx.application.Application
 import javafx.scene.Scene
@@ -60,7 +60,8 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
         }
 
         settings.forEach { (annotation, cfg) ->
-            val menuButton = ClickableMenu(annotation?.name ?: cfg.javaClass.name)
+            val menuButton = ClickableMenu(annotation?.name
+                    ?: cfg.javaClass.name)
             menuButton.setOnAction { propertiesControl.initView(cfg) }
             menuBar.menus.add(menuButton)
         }

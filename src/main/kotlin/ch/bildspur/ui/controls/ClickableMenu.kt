@@ -1,4 +1,4 @@
-package ch.bildspur.ui.fx
+package ch.bildspur.ui.controls
 
 import javafx.beans.property.StringProperty
 import javafx.event.EventHandler

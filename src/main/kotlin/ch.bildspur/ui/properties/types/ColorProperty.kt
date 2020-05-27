@@ -3,8 +3,8 @@ package ch.bildspur.ui.properties.types
 import ch.bildspur.color.RGB
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.properties.ColorParameter
-import ch.bildspur.ui.toFXColor
-import ch.bildspur.ui.toRGB
+import ch.bildspur.ui.fx.toFXColor
+import ch.bildspur.ui.fx.toRGB
 import javafx.application.Platform
 import javafx.scene.control.ColorPicker
 import java.lang.reflect.Field

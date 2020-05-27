@@ -1,7 +1,7 @@
 package ch.bildspur.ui.properties.types
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.EditTextField
+import ch.bildspur.ui.controls.EditTextField
 import ch.bildspur.ui.properties.StringParameter
 import javafx.application.Platform
 import java.lang.reflect.Field

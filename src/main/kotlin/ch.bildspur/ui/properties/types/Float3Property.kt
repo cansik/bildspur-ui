@@ -2,7 +2,7 @@ package ch.bildspur.ui.properties.types
 
 import ch.bildspur.math.Float3
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.NumberField
+import ch.bildspur.ui.controls.NumberField
 import ch.bildspur.ui.properties.Float3Parameter
 import javafx.application.Platform
 import javafx.scene.control.Label

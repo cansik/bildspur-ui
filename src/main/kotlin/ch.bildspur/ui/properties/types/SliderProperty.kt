@@ -1,7 +1,7 @@
 package ch.bildspur.ui.properties.types
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.JavaFXUtils
+import ch.bildspur.ui.fx.JavaFXUtils
 import ch.bildspur.ui.properties.SliderParameter
 import ch.bildspur.util.format
 import javafx.application.Platform
