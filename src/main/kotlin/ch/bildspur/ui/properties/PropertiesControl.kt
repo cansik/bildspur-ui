@@ -55,6 +55,10 @@ class PropertiesControl : VBox() {
     }
 
     private fun addComponent(propertyView: BaseProperty) {
+        propertyView.propertyChanged += {
+            propertyChanged(propertyView)
+        }
+
         children.add(propertyView)
     }
 

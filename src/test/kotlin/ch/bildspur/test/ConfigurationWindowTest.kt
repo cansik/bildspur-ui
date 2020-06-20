@@ -5,6 +5,7 @@ import ch.bildspur.configuration.ConfigurationController
 import ch.bildspur.math.Float2
 import ch.bildspur.math.Float3
 import ch.bildspur.model.DataModel
+import ch.bildspur.model.ListDataModel
 import ch.bildspur.model.NumberRange
 import ch.bildspur.ui.AppConfiguration
 import ch.bildspur.ui.ConfigurationWindow
@@ -72,12 +73,29 @@ class ConfigurationWindowTest {
         @Float3Parameter("Vertex")
         var vertex = DataModel(Float3(0.23f, 0.52f, 1.02f))
 
-        @Expose
         @ActionParameter("Task", "Run")
         var task = {
             println("running...")
             Thread.sleep(500)
+            println("Age: ${this.user.age}")
             println("done!")
+        }
+
+        @Expose
+        @GroupParameter("User")
+        var user = User()
+        class User {
+            @Expose
+            @StringParameter("Name")
+            var name = DataModel("Max")
+
+            @Expose
+            @NumberParameter("Age")
+            var age = DataModel(23)
+
+            @Expose
+            @SliderParameter("Happyness", 0.0, 100.0, 1.0, true, true)
+            var happyness = DataModel(80)
         }
 
         @Expose
@@ -97,6 +115,9 @@ class ConfigurationWindowTest {
         @Expose
         @LabelParameter("Sub Config Label")
         val label = Any()
+
+        @Expose
+        val list = ListDataModel(mutableListOf(2, 3, 5, 2, 3))
     }
 
     @AppConfiguration("DMX")
@@ -109,7 +130,8 @@ class ConfigurationWindowTest {
     fun runConfigWindow() {
         Platform.startup {
             val controller = ConfigurationController("CWT", "bildspur", "test")
-            val window = ConfigurationWindow(controller, "CWT", AppConfig())
+            val cfg = controller.loadAppConfig<AppConfig>()
+            val window = ConfigurationWindow(controller, "CWT", cfg)
             window.start(Stage())
         }
     }
