@@ -1,5 +1,6 @@
 package ch.bildspur.ui.properties
 
+import ch.bildspur.model.DataModel
 import ch.bildspur.ui.properties.types.*
 
 @Target(AnnotationTarget.FIELD)
@@ -70,6 +71,10 @@ annotation class LabelParameter(val name: String)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class GroupParameter(val name: String, val expanded : Boolean = true, val collapsible : Boolean = true)
 
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ListParameter(val name: String, val height : Double = 100.0)
+
 object PropertyAnnotation {
     init {
         val properties = PropertiesRegistry.properties
@@ -86,6 +91,7 @@ object PropertyAnnotation {
         properties.add(PropertiesRegistryEntry(ActionParameter::class.java, ActionParameter::name, ::ActionProperty))
         properties.add(PropertiesRegistryEntry(EnumParameter::class.java, EnumParameter::name, ::EnumProperty))
         properties.add(PropertiesRegistryEntry(ColorParameter::class.java, ColorParameter::name, ::ColorProperty))
+        properties.add(PropertiesRegistryEntry(ListParameter::class.java, ListParameter::name, ::ListProperty))
 
         properties.add(PropertiesRegistryEntry(LabelParameter::class.java, LabelParameter::name, ::LabelProperty))
         properties.add(PropertiesRegistryEntry(GroupParameter::class.java, GroupParameter::name, ::GroupProperty))

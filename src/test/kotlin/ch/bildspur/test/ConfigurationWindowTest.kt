@@ -73,13 +73,19 @@ class ConfigurationWindowTest {
         @Float3Parameter("Vertex")
         var vertex = DataModel(Float3(0.23f, 0.52f, 1.02f))
 
-        @ActionParameter("Task", "Run")
+        @ActionParameter("Task", "Run", false)
         var task = {
             println("running...")
             Thread.sleep(500)
             println("Age: ${this.user.age}")
+            Platform.runLater {
+                userList.remove("Max")
+            }
             println("done!")
         }
+
+        @ListParameter("Users")
+        var userList = ListDataModel(mutableListOf("Max", "Tim", "Florian"))
 
         @Expose
         @GroupParameter("User")
