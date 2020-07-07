@@ -7,6 +7,7 @@ import ch.bildspur.math.Float3
 import ch.bildspur.model.DataModel
 import ch.bildspur.model.ListDataModel
 import ch.bildspur.model.NumberRange
+import ch.bildspur.model.SelectableDataModel
 import ch.bildspur.ui.AppConfiguration
 import ch.bildspur.ui.ConfigurationWindow
 import ch.bildspur.ui.properties.*
@@ -84,8 +85,13 @@ class ConfigurationWindowTest {
             println("done!")
         }
 
+        @Expose
         @ListParameter("Users")
         var userList = ListDataModel(mutableListOf("Max", "Tim", "Florian"))
+
+        @Expose
+        @SelectableListParameter("City")
+        var cities = SelectableDataModel(mutableListOf("Zurich", "Paris", "Berlin"))
 
         @Expose
         @GroupParameter("User")
@@ -137,6 +143,12 @@ class ConfigurationWindowTest {
         Platform.startup {
             val controller = ConfigurationController("CWT", "bildspur", "test")
             val cfg = controller.loadAppConfig<AppConfig>()
+
+            cfg.cities.onChanged += {
+                println("Cities Changed: ${cfg.cities.selectedIndex}")
+            }
+            cfg.cities.fireLatest()
+
             val window = ConfigurationWindow(controller, "CWT", cfg)
             window.start(Stage())
         }

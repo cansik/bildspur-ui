@@ -75,6 +75,10 @@ annotation class GroupParameter(val name: String, val expanded : Boolean = true,
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ListParameter(val name: String, val height : Double = 100.0)
 
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class SelectableListParameter(val name: String)
+
 object PropertyAnnotation {
     init {
         val properties = PropertiesRegistry.properties
@@ -92,6 +96,7 @@ object PropertyAnnotation {
         properties.add(PropertiesRegistryEntry(EnumParameter::class.java, EnumParameter::name, ::EnumProperty))
         properties.add(PropertiesRegistryEntry(ColorParameter::class.java, ColorParameter::name, ::ColorProperty))
         properties.add(PropertiesRegistryEntry(ListParameter::class.java, ListParameter::name, ::ListProperty))
+        properties.add(PropertiesRegistryEntry(SelectableListParameter::class.java, SelectableListParameter::name, ::SelectableListProperty))
 
         properties.add(PropertiesRegistryEntry(LabelParameter::class.java, LabelParameter::name, ::LabelProperty))
         properties.add(PropertiesRegistryEntry(GroupParameter::class.java, GroupParameter::name, ::GroupProperty))

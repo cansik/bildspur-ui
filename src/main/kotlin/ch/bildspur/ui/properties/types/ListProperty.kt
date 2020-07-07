@@ -19,7 +19,7 @@ class ListProperty (field: Field, obj: Any, annoation: ListParameter) : BaseFiel
         model.onChanged += {
             data.setAll(model.map { e -> e.toString() })
         }
-        model.fire()
+        model.fireLatest()
         children.add(listView)
     }
 }
