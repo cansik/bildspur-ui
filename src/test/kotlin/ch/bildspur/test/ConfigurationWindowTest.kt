@@ -48,7 +48,7 @@ class ConfigurationWindowTest {
 
         @Expose
         @NumberParameter("Humidity", "%")
-        var humidty = DataModel(80.0)
+        var humidity = DataModel(80.0)
 
         @Expose
         @ProgressParameter("Progress")
