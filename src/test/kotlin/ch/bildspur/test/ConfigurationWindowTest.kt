@@ -122,6 +122,7 @@ class ConfigurationWindowTest {
     @AppConfiguration("Light")
     class SubConfig {
         @Expose
+        @GroupParameter("DMX")
         var dmx = DMXConfig()
 
         @Expose
