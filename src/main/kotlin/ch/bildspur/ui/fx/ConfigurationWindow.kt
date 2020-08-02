@@ -66,7 +66,9 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
             menuBar.menus.add(menuButton)
         }
 
-        return BorderPane(ScrollPane(propertiesControl), menuBar, null, null, null)
+        val scrollPane = ScrollPane(propertiesControl)
+        scrollPane.isFitToWidth = true;
+        return BorderPane(scrollPane, menuBar, null, null, null)
     }
 
     private fun getAllAppConfigurations(root : Any) : MutableList<Any> {
