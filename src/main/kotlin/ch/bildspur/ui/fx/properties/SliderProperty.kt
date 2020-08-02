@@ -4,6 +4,7 @@ import ch.bildspur.model.DataModel
 import ch.bildspur.ui.fx.utils.JavaFXUtils
 import ch.bildspur.ui.properties.SliderParameter
 import ch.bildspur.ui.fx.BaseFXFieldProperty
+import ch.bildspur.ui.fx.ResettableFXFieldProperty
 import ch.bildspur.util.format
 import javafx.application.Platform
 import javafx.scene.control.Label
@@ -13,12 +14,15 @@ import javafx.scene.layout.Priority
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : BaseFXFieldProperty(field, obj) {
+class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter)
+    : ResettableFXFieldProperty<Number>(field, obj) {
+
     private val slider = Slider(annotation.minValue, annotation.maxValue, 0.0)
     private val valueLabel = Label()
 
     init {
         val model = field.get(obj) as DataModel<Number>
+        initialValue = model.value
 
         slider.majorTickUnit = if (model.value is Int || model.value is Long) 1.0 else annotation.majorTick
         slider.minorTickCount = 0
@@ -53,6 +57,12 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : 
                 preventFirstTime {
                     propertyChanged(this)
                 }
+            }
+        }
+
+        slider.setOnMouseClicked {
+            if (it.clickCount == 2) {
+                model.value = initialValue
             }
         }
     }

@@ -5,6 +5,7 @@ import ch.bildspur.ui.fx.controls.NumberField
 import ch.bildspur.ui.fx.utils.JavaFXUtils
 import ch.bildspur.ui.properties.NumberParameter
 import ch.bildspur.ui.fx.BaseFXFieldProperty
+import ch.bildspur.ui.fx.ResettableFXFieldProperty
 import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.control.Label
@@ -17,7 +18,7 @@ import java.lang.reflect.Field
 import java.text.NumberFormat
 import java.util.*
 
-class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : BaseFXFieldProperty(field, obj) {
+class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : ResettableFXFieldProperty<Number>(field, obj) {
 
     val format = NumberFormat.getInstance(Locale.ENGLISH)
     val numberStringConverter = NumberStringConverter(format)
@@ -43,6 +44,8 @@ class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : 
         children.add(box)
 
         val model = field.get(obj) as DataModel<Number>
+        initialValue = model.value
+
         model.onChanged += {
             Platform.runLater {
                 numberField.value = model.value.toDouble()
@@ -53,6 +56,12 @@ class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : 
         numberField.setOnAction {
             JavaFXUtils.setDoubleToNumberModel(numberField.value, model)
             propertyChanged(this)
+        }
+
+        numberField.setOnMouseClicked {
+            if (it.clickCount == 3) {
+                model.value = initialValue
+            }
         }
     }
 }
