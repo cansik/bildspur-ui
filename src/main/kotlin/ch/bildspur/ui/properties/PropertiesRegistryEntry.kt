@@ -1,6 +1,5 @@
 package ch.bildspur.ui.properties
 
-import ch.bildspur.ui.properties.types.BaseProperty
 import java.lang.reflect.Field
 
 data class PropertiesRegistryEntry<T : Annotation>(val annotation : Class<out Annotation?>?,

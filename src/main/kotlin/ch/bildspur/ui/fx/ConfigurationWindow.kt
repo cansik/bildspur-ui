@@ -1,8 +1,8 @@
-package ch.bildspur.ui
+package ch.bildspur.ui.fx
 
 import ch.bildspur.configuration.ConfigurationController
-import ch.bildspur.ui.controls.ClickableMenu
-import ch.bildspur.ui.properties.PropertiesControl
+import ch.bildspur.ui.AppConfiguration
+import ch.bildspur.ui.fx.controls.ClickableMenu
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.scene.control.*

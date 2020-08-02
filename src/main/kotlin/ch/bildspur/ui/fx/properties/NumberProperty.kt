@@ -1,9 +1,10 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.controls.NumberField
-import ch.bildspur.ui.fx.JavaFXUtils
+import ch.bildspur.ui.fx.controls.NumberField
+import ch.bildspur.ui.fx.utils.JavaFXUtils
 import ch.bildspur.ui.properties.NumberParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.control.Label
@@ -15,7 +16,7 @@ import java.lang.reflect.Field
 import java.text.NumberFormat
 import java.util.*
 
-class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : BaseFieldProperty(field, obj) {
+class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : BaseFXFieldProperty(field, obj) {
 
     val format = NumberFormat.getInstance(Locale.ENGLISH)
     val numberStringConverter = NumberStringConverter(format)

@@ -1,13 +1,14 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.controls.EditTextField
+import ch.bildspur.ui.fx.controls.EditTextField
 import ch.bildspur.ui.properties.StringParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class StringProperty(field: Field, obj: Any, val annotation: StringParameter) : BaseFieldProperty(field, obj) {
+class StringProperty(field: Field, obj: Any, val annotation: StringParameter) : BaseFXFieldProperty(field, obj) {
 
     val textField = EditTextField()
 

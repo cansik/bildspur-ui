@@ -1,13 +1,14 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.ListDataModel
 import ch.bildspur.ui.properties.ListParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.scene.control.ListView
 import java.lang.reflect.Field
 
-class ListProperty (field: Field, obj: Any, annoation: ListParameter) : BaseFieldProperty(field, obj) {
+class ListProperty (field: Field, obj: Any, annoation: ListParameter) : BaseFXFieldProperty(field, obj) {
     private val listView = ListView<String>()
     private val data : ObservableList<String> = FXCollections.observableArrayList()
 

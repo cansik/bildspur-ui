@@ -9,7 +9,7 @@ import ch.bildspur.model.ListDataModel
 import ch.bildspur.model.NumberRange
 import ch.bildspur.model.SelectableDataModel
 import ch.bildspur.ui.AppConfiguration
-import ch.bildspur.ui.ConfigurationWindow
+import ch.bildspur.ui.fx.ConfigurationWindow
 import ch.bildspur.ui.properties.*
 import com.google.gson.annotations.Expose
 import javafx.application.Platform

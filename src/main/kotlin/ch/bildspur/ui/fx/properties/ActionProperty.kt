@@ -1,6 +1,7 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.ui.properties.ActionParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.scene.Cursor
 import javafx.scene.control.Button
@@ -13,7 +14,7 @@ import java.lang.reflect.Field
 import kotlin.concurrent.thread
 
 @Suppress("UNCHECKED_CAST")
-class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : BaseFieldProperty(field, obj) {
+class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : BaseFXFieldProperty(field, obj) {
     val button = Button()
     val progress = ProgressIndicator()
     val errorText = Label()

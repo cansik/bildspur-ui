@@ -1,7 +1,10 @@
-package ch.bildspur.ui.properties
+package ch.bildspur.ui.fx
 
 import ch.bildspur.event.Event
-import ch.bildspur.ui.properties.types.*
+import ch.bildspur.ui.properties.PropertiesRegistry
+import ch.bildspur.ui.properties.PropertiesRegistryEntry
+import ch.bildspur.ui.properties.PropertyAnnotation
+import ch.bildspur.ui.properties.PropertyComponent
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Label
@@ -12,7 +15,7 @@ import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
 class PropertiesControl : VBox() {
-    val propertyChanged = Event<BaseProperty>()
+    val propertyChanged = Event<BaseFXProperty>()
 
     init {
         spacing = 10.0
@@ -37,14 +40,16 @@ class PropertiesControl : VBox() {
                     val name = property.getName(annotation)
                     val propertyControl = property.getPropertyControl(it, obj, annotation)
 
-                    // component exception
-                    if(propertyControl is PropertyComponent) {
-                        addComponent(propertyControl)
+                    if(propertyControl is BaseFXProperty) {
+                        // component exception
+                        if (propertyControl is PropertyComponent) {
+                            addComponent(propertyControl)
+                            break
+                        }
+
+                        addProperty(name, propertyControl)
                         break
                     }
-
-                    addProperty(name, propertyControl)
-                    break
                 }
             }
         }
@@ -54,7 +59,7 @@ class PropertiesControl : VBox() {
         this.children.clear()
     }
 
-    private fun addComponent(propertyView: BaseProperty) {
+    private fun addComponent(propertyView: BaseFXProperty) {
         propertyView.propertyChanged += {
             propertyChanged(propertyView)
         }
@@ -62,7 +67,7 @@ class PropertiesControl : VBox() {
         children.add(propertyView)
     }
 
-    private fun addProperty(name: String, propertyView: BaseProperty) {
+    private fun addProperty(name: String, propertyView: BaseFXProperty) {
         propertyView.propertyChanged += {
             propertyChanged(propertyView)
         }

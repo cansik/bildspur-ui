@@ -1,4 +1,4 @@
-package ch.bildspur.ui.controls
+package ch.bildspur.ui.fx.controls
 
 import javafx.beans.binding.Bindings
 import javafx.beans.property.DoubleProperty

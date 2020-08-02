@@ -1,13 +1,14 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.properties.EnumParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.scene.control.ComboBox
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class EnumProperty(field: Field, obj: Any, val annotation: EnumParameter) : BaseFieldProperty(field, obj) {
+class EnumProperty(field: Field, obj: Any, val annotation: EnumParameter) : BaseFXFieldProperty(field, obj) {
     val box = ComboBox<Enum<*>>()
 
     init {

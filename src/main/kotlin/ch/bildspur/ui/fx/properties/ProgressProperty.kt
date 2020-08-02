@@ -1,8 +1,8 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.properties.NumberParameter
 import ch.bildspur.ui.properties.ProgressParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.control.Label
@@ -15,7 +15,7 @@ import java.text.NumberFormat
 import java.util.*
 import kotlin.math.round
 
-class ProgressProperty(field: Field, obj: Any, val annotation: ProgressParameter) : BaseFieldProperty(field, obj) {
+class ProgressProperty(field: Field, obj: Any, val annotation: ProgressParameter) : BaseFXFieldProperty(field, obj) {
 
     private val format = NumberFormat.getInstance(Locale.ENGLISH)
     private val numberStringConverter = NumberStringConverter(format)

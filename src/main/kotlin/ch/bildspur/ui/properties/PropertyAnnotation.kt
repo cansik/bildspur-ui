@@ -1,7 +1,6 @@
 package ch.bildspur.ui.properties
 
-import ch.bildspur.model.DataModel
-import ch.bildspur.ui.properties.types.*
+import ch.bildspur.ui.fx.properties.*
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)

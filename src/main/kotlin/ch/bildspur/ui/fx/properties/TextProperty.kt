@@ -1,7 +1,8 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.properties.TextParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.scene.control.Button
 import javafx.scene.control.TextArea
@@ -9,7 +10,7 @@ import javafx.scene.layout.VBox
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class TextProperty(field: Field, obj: Any, val annotation: TextParameter) : BaseFieldProperty(field, obj) {
+class TextProperty(field: Field, obj: Any, val annotation: TextParameter) : BaseFXFieldProperty(field, obj) {
 
     val textArea = TextArea()
     val submitButton = Button("Submit")

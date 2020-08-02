@@ -1,9 +1,10 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.math.Float3
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.controls.NumberField
+import ch.bildspur.ui.fx.controls.NumberField
 import ch.bildspur.ui.properties.Float3Parameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.scene.control.Label
 import javafx.scene.control.TextFormatter
@@ -13,7 +14,7 @@ import javafx.util.converter.FloatStringConverter
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class Float3Property(field: Field, obj: Any, val annotation: Float3Parameter) : BaseFieldProperty(field, obj) {
+class Float3Property(field: Field, obj: Any, val annotation: Float3Parameter) : BaseFXFieldProperty(field, obj) {
 
     val model = field.get(obj) as DataModel<Float3>
     val xField = NumberField<Float>(TextFormatter(FloatStringConverter()))

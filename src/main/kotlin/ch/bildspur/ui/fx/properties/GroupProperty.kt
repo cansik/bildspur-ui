@@ -1,16 +1,15 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
-import ch.bildspur.model.DataModel
 import ch.bildspur.ui.properties.GroupParameter
-import ch.bildspur.ui.properties.PropertiesControl
-import javafx.geometry.Insets
-import javafx.scene.control.Label
+import ch.bildspur.ui.fx.PropertiesControl
+import ch.bildspur.ui.fx.BaseFXFieldProperty
+import ch.bildspur.ui.properties.PropertyComponent
 import javafx.scene.control.TitledPane
 import javafx.scene.text.Font
 import javafx.scene.text.FontWeight
 import java.lang.reflect.Field
 
-class GroupProperty (field : Field, obj: Any, private val annoation: GroupParameter) : BaseFieldProperty(field, obj), PropertyComponent {
+class GroupProperty (field : Field, obj: Any, private val annoation: GroupParameter) : BaseFXFieldProperty(field, obj), PropertyComponent {
     private val control = PropertiesControl()
     private val titledPane = TitledPane(annoation.name, control)
 

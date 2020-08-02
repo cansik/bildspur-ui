@@ -1,8 +1,9 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.fx.JavaFXUtils
+import ch.bildspur.ui.fx.utils.JavaFXUtils
 import ch.bildspur.ui.properties.SliderParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import ch.bildspur.util.format
 import javafx.application.Platform
 import javafx.scene.control.Label
@@ -11,7 +12,7 @@ import javafx.scene.layout.HBox
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : BaseFieldProperty(field, obj) {
+class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : BaseFXFieldProperty(field, obj) {
     private val slider = Slider(annotation.minValue, annotation.maxValue, 0.0)
     private val valueLabel = Label()
 

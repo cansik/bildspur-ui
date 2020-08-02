@@ -1,8 +1,9 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.model.NumberRange
 import ch.bildspur.ui.properties.RangeSliderParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import ch.bildspur.util.format
 import javafx.application.Platform
 import javafx.scene.control.Label
@@ -12,7 +13,7 @@ import org.controlsfx.control.RangeSlider
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class RangeSliderProperty(field: Field, obj: Any, val annotation: RangeSliderParameter) : BaseFieldProperty(field, obj) {
+class RangeSliderProperty(field: Field, obj: Any, val annotation: RangeSliderParameter) : BaseFXFieldProperty(field, obj) {
     private val slider = RangeSlider(annotation.minValue, annotation.maxValue, annotation.minValue, annotation.maxValue)
     private val valueLabel = Label()
 

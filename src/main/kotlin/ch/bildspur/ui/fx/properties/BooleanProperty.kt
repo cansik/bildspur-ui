@@ -1,13 +1,14 @@
-package ch.bildspur.ui.properties.types
+package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.properties.BooleanParameter
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.scene.control.CheckBox
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
-class BooleanProperty(field: Field, obj: Any, val annoation: BooleanParameter) : BaseFieldProperty(field, obj) {
+class BooleanProperty(field: Field, obj: Any, val annoation: BooleanParameter) : BaseFXFieldProperty(field, obj) {
 
     val checkBox = CheckBox()
 

@@ -1,7 +1,6 @@
-package ch.bildspur.ui.controls
+package ch.bildspur.ui.fx.controls
 
 import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.scene.control.TextField
 
 open class EditTextField : TextField() {
