@@ -18,7 +18,7 @@ repositories {
 
 javafx {
     version = "11"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.web' ]
 }
 
 dependencies {
@@ -34,6 +34,7 @@ dependencies {
     // javafx
     compile group: 'org.openjfx', name: 'javafx-base', version: '11.0.2'
     compile group: 'org.openjfx', name: 'javafx-controls', version: '11.0.2'
+    compile group: 'org.openjfx', name: 'javafx-web', version: '11.0.2'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '11.0.0'
 
     // json
