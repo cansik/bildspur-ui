@@ -9,6 +9,7 @@ import ch.bildspur.ui.properties.StringParameter
 import com.google.gson.annotations.Expose
 import javafx.application.Platform
 import javafx.stage.Stage
+import kotlin.concurrent.thread
 
 fun main() {
     HTMLWebViewTest().run()
@@ -47,9 +48,17 @@ class HTMLWebViewTest {
                         <input id="name" type="text" />
                     </body>
                 </html>
-            """.trimIndent())
+            """.trimIndent(), model)
             window.start(Stage())
-            window.propertyWebView.bind(model)
+        }
+
+        thread {
+            while(1 < 200) {
+                Thread.sleep(100)
+                Platform.runLater {
+                    model.name.value = "Time: ${System.currentTimeMillis()}"
+                }
+            }
         }
     }
 }

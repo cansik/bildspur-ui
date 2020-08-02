@@ -24,6 +24,10 @@ class PropertyWebView(val htmlUI : String, val reader : PropertyReader = Propert
             fun log(msg : String) {
                 println("JS: $msg")
             }
+
+            fun changed(elementId: String) {
+                println("Element Changed: $elementId")
+            }
         })
 
         engine.setConfirmHandler {
