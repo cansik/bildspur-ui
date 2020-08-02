@@ -2,8 +2,10 @@ package ch.bildspur.ui.html
 
 import ch.bildspur.event.Event
 import ch.bildspur.ui.properties.BaseProperty
+import javafx.scene.web.WebEngine
+import org.w3c.dom.Element
 
-open class BaseHTMLProperty(val elementId : String) : BaseProperty {
+abstract class BaseHTMLProperty(val elementId : String) : BaseProperty {
     override val propertyChanged = Event<BaseProperty>()
 
     @Volatile override var isSetup = false
@@ -15,5 +17,10 @@ open class BaseHTMLProperty(val elementId : String) : BaseProperty {
         isSetup = true
     }
 
+    fun getElementById(engine : WebEngine) : Element {
+        return engine.document.getElementById(elementId)
+    }
 
+    abstract fun bind(engine : WebEngine)
+    abstract fun unbind(engine : WebEngine)
 }

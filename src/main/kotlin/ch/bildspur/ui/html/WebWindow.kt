@@ -5,8 +5,8 @@ import javafx.scene.Scene
 import javafx.stage.Screen
 import javafx.stage.Stage
 
-class WebWindow(val title : String) : Application() {
-    val propertyWebView = PropertyWebView()
+class WebWindow(val title : String, val htmlUI : String) : Application() {
+    val propertyWebView = PropertyWebView(htmlUI)
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = title

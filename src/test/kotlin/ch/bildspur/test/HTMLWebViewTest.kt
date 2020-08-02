@@ -39,7 +39,15 @@ class HTMLWebViewTest {
     fun run() {
         val model = Model()
         Platform.startup {
-            val window = WebWindow("Web Window")
+            val window = WebWindow("Web Window", """
+                <html>
+                    <head></head>
+                    <body>
+                        <a id="rename" href="#">Rename</a>
+                        <input id="name" type="text" />
+                    </body>
+                </html>
+            """.trimIndent())
             window.start(Stage())
             window.propertyWebView.bind(model)
         }
