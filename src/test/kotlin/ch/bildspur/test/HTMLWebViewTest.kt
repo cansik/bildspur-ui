@@ -2,6 +2,7 @@ package ch.bildspur.test
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.AppConfiguration
+import ch.bildspur.ui.html.HTMLElement
 import ch.bildspur.ui.html.WebWindow
 import ch.bildspur.ui.properties.ActionParameter
 import ch.bildspur.ui.properties.StringParameter
@@ -18,9 +19,11 @@ class HTMLWebViewTest {
     class Model {
 
         @Expose
+        @HTMLElement("name")
         @StringParameter("Name")
         var name = DataModel("bildspur")
 
+        @HTMLElement("rename")
         @ActionParameter("Task", "Rename", false)
         var task = {
             println("running...")
