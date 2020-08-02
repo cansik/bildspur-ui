@@ -6,6 +6,7 @@ import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.scene.control.ListView
+import javafx.scene.layout.Priority
 import java.lang.reflect.Field
 
 class ListProperty (field: Field, obj: Any, annoation: ListParameter) : BaseFXFieldProperty(field, obj) {
@@ -21,6 +22,8 @@ class ListProperty (field: Field, obj: Any, annoation: ListParameter) : BaseFXFi
             data.setAll(model.map { e -> e.toString() })
         }
         model.fireLatest()
+
+        setHgrow(listView, Priority.ALWAYS)
         children.add(listView)
     }
 }

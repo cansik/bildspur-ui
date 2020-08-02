@@ -9,6 +9,7 @@ import javafx.application.Platform
 import javafx.scene.control.Label
 import javafx.scene.control.Slider
 import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
@@ -23,10 +24,14 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter) : 
         slider.minorTickCount = 0
         slider.isSnapToTicks = if (model.value is Int || model.value is Long) true else annotation.snap
 
+        slider.maxWidth = Double.MAX_VALUE
+        setHgrow(slider, Priority.ALWAYS)
+
         val digits = if (model.value is Int || annotation.roundInt) 0 else 2
 
         val box = HBox(slider, valueLabel)
         box.spacing = 10.0
+        setHgrow(box, Priority.ALWAYS)
         children.add(box)
 
         model.onChanged += {

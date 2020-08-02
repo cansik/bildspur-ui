@@ -7,6 +7,7 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.scene.text.Font
 
@@ -16,7 +17,7 @@ class PropertiesControl(val reader : PropertyReader = PropertyReader(FXPropertyR
     init {
         spacing = 10.0
         alignment = Pos.TOP_CENTER
-        padding = Insets(10.0, 20.0, 10.0, 10.0)
+        padding = Insets(10.0, 20.0, 10.0, 20.0)
     }
 
     fun initView(obj: Any) {
@@ -55,14 +56,18 @@ class PropertiesControl(val reader : PropertyReader = PropertyReader(FXPropertyR
         }
 
         val nameLabel = Label("$name:")
-        nameLabel.prefWidth = 100.0
+        nameLabel.prefWidth = 80.0
         nameLabel.font = Font("Helvetica", 12.0)
         nameLabel.isWrapText = true
+
+        HBox.setHgrow(propertyView, Priority.ALWAYS)
+        HBox.setHgrow(nameLabel, Priority.ALWAYS)
 
         val box = HBox(nameLabel, propertyView)
         box.spacing = 10.0
         box.prefHeight = propertyView.prefHeight
         box.alignment = Pos.CENTER_LEFT
+
         children.add(box)
     }
 }

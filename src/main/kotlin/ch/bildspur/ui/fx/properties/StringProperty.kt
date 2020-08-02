@@ -5,6 +5,8 @@ import ch.bildspur.ui.fx.controls.EditTextField
 import ch.bildspur.ui.properties.StringParameter
 import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
+import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
@@ -13,7 +15,7 @@ class StringProperty(field: Field, obj: Any, val annotation: StringParameter) : 
     val textField = EditTextField()
 
     init {
-        textField.prefWidth = 180.0
+        setHgrow(textField, Priority.ALWAYS)
         textField.isEditable = annotation.isEditable
         applyStyle()
 

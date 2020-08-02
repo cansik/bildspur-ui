@@ -7,6 +7,7 @@ import ch.bildspur.ui.fx.BaseFXFieldProperty
 import ch.bildspur.util.format
 import javafx.application.Platform
 import javafx.scene.control.Label
+import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.scene.text.TextAlignment
 import org.controlsfx.control.RangeSlider
@@ -24,12 +25,15 @@ class RangeSliderProperty(field: Field, obj: Any, val annotation: RangeSliderPar
         slider.majorTickUnit = annotation.majorTick
         slider.minorTickCount = 0
         slider.isSnapToTicks = annotation.snap
-        slider.prefWidth = 180.0
+        slider.maxWidth = Double.MAX_VALUE
+        setHgrow(slider, Priority.ALWAYS)
 
-        valueLabel.prefWidth = 180.0
+        setHgrow(valueLabel, Priority.ALWAYS)
+        valueLabel.maxWidth = Double.MAX_VALUE
         valueLabel.textAlignment = TextAlignment.CENTER
 
         val box = VBox(slider, valueLabel)
+        setHgrow(box, Priority.ALWAYS)
         box.spacing = 10.0
         children.add(box)
 

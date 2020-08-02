@@ -8,6 +8,7 @@ import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
 import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import javafx.scene.text.Font
 import javafx.util.converter.NumberStringConverter
 import java.lang.reflect.Field
@@ -31,6 +32,11 @@ class ProgressProperty(field: Field, obj: Any, val annotation: ProgressParameter
 
         box.spacing = 10.0
         box.alignment = Pos.CENTER_LEFT
+
+        progressBar.maxWidth = Double.MAX_VALUE
+        setHgrow(progressBar, Priority.ALWAYS)
+        setHgrow(box, Priority.ALWAYS)
+
         children.add(box)
 
         valueField.isVisible = annotation.displayValue

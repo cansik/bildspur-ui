@@ -10,6 +10,7 @@ import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.control.TextFormatter
 import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import javafx.scene.text.Font
 import javafx.util.converter.NumberStringConverter
 import java.lang.reflect.Field
@@ -25,14 +26,20 @@ class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : 
     val numberField = NumberField<Number>(textFormatter)
     val unitField = Label(annotation.unit)
 
-    val box = HBox(numberField, unitField)
-
     init {
         format.isGroupingUsed = false
         unitField.font = Font("Helvetica", 10.0)
 
+        val box = HBox(numberField)
         box.spacing = 10.0
         box.alignment = Pos.CENTER_LEFT
+        setHgrow(box, Priority.ALWAYS)
+        setHgrow(numberField, Priority.ALWAYS)
+
+        if(annotation.unit.isNotBlank()) {
+            box.children.add(unitField)
+        }
+
         children.add(box)
 
         val model = field.get(obj) as DataModel<Number>

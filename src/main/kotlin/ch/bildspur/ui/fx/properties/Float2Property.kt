@@ -6,11 +6,14 @@ import ch.bildspur.ui.fx.controls.NumberField
 import ch.bildspur.ui.properties.Float2Parameter
 import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
+import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.control.TextFormatter
 import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.util.converter.FloatStringConverter
+import java.lang.Double
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
@@ -25,14 +28,17 @@ class Float2Property(field: Field, obj: Any, val annotation: Float2Parameter) : 
             Pair("Y", yField))
 
     init {
-        val box = VBox()
-        box.spacing = 5.0
+        val vb = VBox()
+        vb.spacing = 5.0
+        vb.maxWidth = Double.MAX_VALUE
+        setHgrow(vb, Priority.ALWAYS)
 
         // setup fields
         fields.forEach {
             val label = Label("${it.key}:")
 
-            it.value.prefWidth = 160.0
+            it.value.maxWidth = Double.MAX_VALUE
+            setHgrow(it.value, Priority.ALWAYS)
             label.prefWidth = 20.0
 
             it.value.setOnAction {
@@ -41,7 +47,9 @@ class Float2Property(field: Field, obj: Any, val annotation: Float2Parameter) : 
                         yField.value.toFloat())
             }
 
-            box.children.add(HBox(label, it.value))
+            val hb = HBox(label, it.value)
+            hb.alignment = Pos.CENTER_LEFT
+            vb.children.add(hb)
         }
 
         // setup binding
@@ -52,6 +60,6 @@ class Float2Property(field: Field, obj: Any, val annotation: Float2Parameter) : 
             }
         }
         model.fireLatest()
-        children.add(box)
+        children.add(vb)
     }
 }

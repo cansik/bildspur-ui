@@ -5,6 +5,8 @@ import ch.bildspur.ui.properties.EnumParameter
 import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.scene.control.ComboBox
+import javafx.scene.layout.Priority
+import java.lang.Double.MAX_VALUE
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
@@ -40,7 +42,8 @@ class EnumProperty(field: Field, obj: Any, val annotation: EnumParameter) : Base
             }
         }
 
-        box.prefWidth = 170.0
+        box.maxWidth = MAX_VALUE
+        setHgrow(box, Priority.ALWAYS)
         children.add(box)
     }
 }
