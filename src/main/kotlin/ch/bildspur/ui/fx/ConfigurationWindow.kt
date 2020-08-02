@@ -28,7 +28,7 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
 
         // move to the right side of the screen
         val primScreenBounds = Screen.getPrimary().visualBounds
-        primaryStage.x = primScreenBounds.width / 8.0 * 7.0
+        primaryStage.x = primScreenBounds.width / 8.0 * 7.0 - primaryStage.scene.width
 
         primaryStage.show()
     }
