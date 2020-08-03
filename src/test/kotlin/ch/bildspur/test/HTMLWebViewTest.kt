@@ -27,13 +27,9 @@ class HTMLWebViewTest {
         @HTMLElement("rename")
         @ActionParameter("Task", "Rename", false)
         var task = {
-            println("running...")
-            Thread.sleep(500)
-            println("Name: ${name.value}")
             Platform.runLater {
                 name.value = "bsp studio"
             }
-            println("done!")
         }
     }
 
@@ -50,15 +46,6 @@ class HTMLWebViewTest {
                 </html>
             """.trimIndent(), model)
             window.start(Stage())
-        }
-
-        thread {
-            while(1 < 200) {
-                Thread.sleep(100)
-                Platform.runLater {
-                    model.name.value = "Time: ${System.currentTimeMillis()}"
-                }
-            }
         }
     }
 }

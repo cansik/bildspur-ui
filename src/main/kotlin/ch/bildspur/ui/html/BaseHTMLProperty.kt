@@ -21,6 +21,6 @@ abstract class BaseHTMLProperty(val elementId : String) : BaseProperty {
         return engine.document.getElementById(elementId)
     }
 
-    abstract fun bind(engine : WebEngine)
-    abstract fun unbind(engine : WebEngine)
+    abstract fun bind(engine : WebEngine, bindings : MutableMap<String, HTMLActionListener>)
+    abstract fun unbind(engine : WebEngine, bindings : MutableMap<String, HTMLActionListener>)
 }

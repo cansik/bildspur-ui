@@ -10,13 +10,14 @@ class PropertyWebView(val htmlUI : String, val reader : PropertyReader = Propert
     val webView = WebView()
     val engine = webView.engine
 
+    val bindings = mutableMapOf<String, HTMLActionListener>()
+
     init {
         //webView.prefWidth = Double.MAX_VALUE
         setHgrow(webView, Priority.ALWAYS)
         children.add(webView)
 
         engine.isJavaScriptEnabled = true
-        engine.loadContent(htmlUI)
 
         // add methods
         val window = engine.executeScript("window") as JSObject
@@ -27,6 +28,7 @@ class PropertyWebView(val htmlUI : String, val reader : PropertyReader = Propert
 
             fun changed(elementId: String) {
                 println("Element Changed: $elementId")
+                bindings[elementId]?.onAction(engine)
             }
         })
 
@@ -34,12 +36,14 @@ class PropertyWebView(val htmlUI : String, val reader : PropertyReader = Propert
             println("confirm: $it")
             true
         }
+
+        engine.loadContent(htmlUI)
     }
 
     fun bind(obj : Any) {
         reader.readPropertyAnnotations(obj).forEach {
-            if (it.property is BaseHTMLElementProperty) {
-                it.property.bind(engine)
+            if (it.property is BaseHTMLProperty) {
+                it.property.bind(engine, bindings)
             }
         }
     }

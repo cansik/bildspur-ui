@@ -5,40 +5,27 @@ import javafx.scene.web.WebEngine
 import netscape.javascript.JSObject
 import java.lang.reflect.Field
 
-open class BaseHTMLElementProperty(val actionEvent : String, val field: Field, val obj: Any) : BaseHTMLProperty(field.getElementId()) {
+abstract class BaseHTMLElementProperty(val actionEventName : String, val field: Field, val obj: Any)
+    : BaseHTMLProperty(field.getElementId()), HTMLActionListener {
 
     fun getElement(engine : WebEngine) : JSObject {
         return engine.executeScript("document.getElementById(\"$elementId\")") as JSObject
     }
 
-    override fun bind(engine : WebEngine) {
+    override fun bind(engine : WebEngine, bindings : MutableMap<String, HTMLActionListener>) {
         engine.executeScript("""
-            // ready state
-            function ready(fn) {
-              if (document.readyState != 'loading'){
-                fn();
-              } else if (document.addEventListener) {
-                document.addEventListener('DOMContentLoaded', fn);
-              } else {
-                document.attachEvent('onreadystatechange', function() {
-                  if (document.readyState != 'loading')
-                    fn();
-                });
-              }
-            }
-            
-            ready(function() {
-                // run change command
-                document.getElementById("$elementId").addEventListener("$actionEvent", function(){
-                    window.confirm("$elementId");
-                    java.changed("$elementId");
-                });
+            document.getElementById("$elementId").addEventListener("$actionEventName", function() {
+                window.confirm("$elementId");
+                java.changed("$elementId");
             });
         """.trimIndent())
+
+        bindings[elementId] = this
     }
 
 
-    override fun unbind(engine: WebEngine) {
+    override fun unbind(engine: WebEngine, bindings : MutableMap<String, HTMLActionListener>) {
+        bindings.remove(elementId)
         TODO("Not yet implemented")
     }
 }
