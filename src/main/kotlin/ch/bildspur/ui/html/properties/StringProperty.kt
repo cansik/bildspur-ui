@@ -9,7 +9,7 @@ import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
 class StringProperty(field: Field, obj: Any, val annotation: StringParameter)
-    : BaseHTMLElementProperty("keydown", field, obj) {
+    : BaseHTMLElementProperty("input", field, obj) {
 
     val model = field.get(obj) as DataModel<Any>
 
@@ -27,7 +27,7 @@ class StringProperty(field: Field, obj: Any, val annotation: StringParameter)
 
     override fun onAction(engine: WebEngine) {
         val element = getElement(engine)
-        model.value = element.eval("value") as String
+        model.setSilent(element.getMember("value") as String)
         propertyChanged(this)
     }
 }

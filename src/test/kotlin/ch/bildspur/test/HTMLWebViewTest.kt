@@ -28,6 +28,7 @@ class HTMLWebViewTest {
         @ActionParameter("Task", "Rename", false)
         var task = {
             Platform.runLater {
+                println("Name: ${name.value}")
                 name.value = "bsp studio"
             }
         }

@@ -6,7 +6,7 @@ import javafx.scene.layout.Priority
 import javafx.scene.web.WebView
 import netscape.javascript.JSObject
 
-class PropertyWebView(val htmlUI : String, val reader : PropertyReader = PropertyReader(HTMLPropertyRegistry.properties)) : HBox() {
+class PropertyWebView(val html : String, val reader : PropertyReader = PropertyReader(HTMLPropertyRegistry.properties)) : HBox() {
     val webView = WebView()
     val engine = webView.engine
 
@@ -27,7 +27,7 @@ class PropertyWebView(val htmlUI : String, val reader : PropertyReader = Propert
         children.add(webView)
         engine.isJavaScriptEnabled = true
 
-        engine.loadContent(htmlUI)
+        engine.loadContent(html)
     }
 
     fun injectScripts() {
