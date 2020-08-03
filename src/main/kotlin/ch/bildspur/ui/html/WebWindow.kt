@@ -17,6 +17,7 @@ class WebWindow(val title : String, val htmlUI : String, val model : Any) : Appl
 
         primaryStage.setOnShown {
             propertyWebView.engine.loadWorker.stateProperty().addListener { ov, oldState, newState ->
+                propertyWebView.injectScripts()
                 propertyWebView.bind(model)
             }
         }

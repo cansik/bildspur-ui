@@ -15,7 +15,7 @@ abstract class BaseHTMLElementProperty(val actionEventName : String, val field: 
     override fun bind(engine : WebEngine, bindings : MutableMap<String, HTMLActionListener>) {
         engine.executeScript("""
             document.getElementById("$elementId").addEventListener("$actionEventName", function() {
-                window.confirm("$elementId");
+                //window.confirm("$elementId");
                 java.changed("$elementId");
             });
         """.trimIndent())

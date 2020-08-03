@@ -12,32 +12,28 @@ class PropertyWebView(val htmlUI : String, val reader : PropertyReader = Propert
 
     val bindings = mutableMapOf<String, HTMLActionListener>()
 
-    init {
-        //webView.prefWidth = Double.MAX_VALUE
-        setHgrow(webView, Priority.ALWAYS)
-        children.add(webView)
-
-        engine.isJavaScriptEnabled = true
-
-        // add methods
-        val window = engine.executeScript("window") as JSObject
-        window.setMember("java", object {
-            fun log(msg : String) {
-                println("JS: $msg")
-            }
-
-            fun changed(elementId: String) {
-                println("Element Changed: $elementId")
-                bindings[elementId]?.onAction(engine)
-            }
-        })
-
-        engine.setConfirmHandler {
-            println("confirm: $it")
-            true
+    private val bridge = object {
+        fun log(msg : String) {
+            println("JS: $msg")
         }
 
+        fun changed(elementId: String) {
+            bindings[elementId]?.onAction(engine)
+        }
+    }
+
+    init {
+        setHgrow(webView, Priority.ALWAYS)
+        children.add(webView)
+        engine.isJavaScriptEnabled = true
+
         engine.loadContent(htmlUI)
+    }
+
+    fun injectScripts() {
+        // add methods
+        val window = engine.executeScript("window") as JSObject
+        window.setMember("java", bridge)
     }
 
     fun bind(obj : Any) {
