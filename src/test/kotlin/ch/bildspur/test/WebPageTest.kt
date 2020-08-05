@@ -11,10 +11,10 @@ import javafx.application.Platform
 import javafx.stage.Stage
 
 fun main() {
-    HTMLWebViewTest().run()
+    WebPageTest().run()
 }
 
-class HTMLWebViewTest {
+class WebPageTest {
     @AppConfiguration("Test")
     class Model {
 
@@ -37,15 +37,7 @@ class HTMLWebViewTest {
         val model = Model()
         Platform.startup {
             val window = WebWindow("Web Window")
-            window.webView.loadContent("""
-                <html>
-                    <head></head>
-                    <body>
-                        <a id="rename" href="#">Rename</a>
-                        <input id="name" type="text" />
-                    </body>
-                </html>
-            """.trimIndent(), model)
+            window.webView.load("https://bildspur.ch")
             window.start(Stage())
         }
     }

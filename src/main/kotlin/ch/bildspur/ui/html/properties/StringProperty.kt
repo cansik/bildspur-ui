@@ -9,7 +9,7 @@ import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
 class StringProperty(field: Field, obj: Any, val annotation: StringParameter)
-    : BaseHTMLElementProperty("input", field, obj) {
+    : BaseHTMLElementProperty("change", field, obj) {
 
     val model = field.get(obj) as DataModel<Any>
 

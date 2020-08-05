@@ -1,25 +1,20 @@
 package ch.bildspur.ui.html
 
 import javafx.application.Application
-import javafx.concurrent.WorkerStateEvent
 import javafx.scene.Scene
 import javafx.stage.Screen
 import javafx.stage.Stage
 
-class WebWindow(val title : String, val htmlUI : String, val model : Any) : Application() {
-    val propertyWebView = PropertyWebView(htmlUI)
+class WebWindow(val title : String) : Application() {
+    val webView = PropertyWebView()
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = title
 
-        val root = propertyWebView
+        val root = webView
         primaryStage.scene = Scene(root, 720.0, 640.0)
 
         primaryStage.setOnShown {
-            propertyWebView.engine.loadWorker.stateProperty().addListener { ov, oldState, newState ->
-                propertyWebView.injectScripts()
-                propertyWebView.bind(model)
-            }
         }
 
         primaryStage.setOnCloseRequest {
