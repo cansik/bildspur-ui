@@ -7,10 +7,10 @@ import kotlin.math.roundToLong
 object JavaFXUtils {
     fun setDoubleToNumberModel(value : Double, model : DataModel<Number>) {
         if(model.value is Byte)
-            model.value = value.toByte()
+            model.value = value.toInt().toByte()
 
         if (model.value is Short)
-            model.value = value.toShort()
+            model.value = value.toInt().toShort()
 
         if (model.value is Int)
             model.value = value.roundToInt()

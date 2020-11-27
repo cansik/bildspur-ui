@@ -1,6 +1,6 @@
 package ch.bildspur.ui.properties
 
-import ch.bildspur.ui.fx.properties.*
+import ch.bildspur.util.Easing
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
