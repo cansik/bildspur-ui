@@ -9,7 +9,6 @@ import ch.bildspur.ui.fx.BaseFXFieldProperty
 import javafx.application.Platform
 import javafx.scene.control.ColorPicker
 import javafx.scene.layout.Priority
-import java.lang.Double
 import java.lang.reflect.Field
 
 @Suppress("UNCHECKED_CAST")
