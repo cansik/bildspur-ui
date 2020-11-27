@@ -11,6 +11,7 @@ import ch.bildspur.model.SelectableDataModel
 import ch.bildspur.ui.AppConfiguration
 import ch.bildspur.ui.fx.ConfigurationWindow
 import ch.bildspur.ui.properties.*
+import ch.bildspur.util.Easing
 import com.google.gson.annotations.Expose
 import javafx.application.Platform
 import javafx.stage.Stage
@@ -43,6 +44,10 @@ class ConfigurationWindowTest {
         var temperature = DataModel(60)
 
         @Expose
+        @SliderParameter("Scale", 0.001, 10.0, 0.001, mapping = Easing.EaseInCubic)
+        var scale = DataModel(0.5f)
+
+        @Expose
         @RangeSliderParameter("Temperature Range", 0.0, 100.0, 1.0, true, true)
         var temperatureRange = DataModel(NumberRange(20.0, 80.0))
 
@@ -57,6 +62,10 @@ class ConfigurationWindowTest {
         @Expose
         @BooleanParameter("Heating")
         var heating = DataModel(true)
+
+        @Expose
+        @BooleanParameter("Extended Feature", useToggleSwitch = true)
+        var extendedFeature = DataModel(true)
 
         @Expose
         @ColorParameter("Sunset")

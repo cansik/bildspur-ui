@@ -40,7 +40,7 @@ annotation class ProgressParameter(val name: String, val displayValue : Boolean 
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class BooleanParameter(val name: String)
+annotation class BooleanParameter(val name: String, val useToggleSwitch : Boolean = false)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
