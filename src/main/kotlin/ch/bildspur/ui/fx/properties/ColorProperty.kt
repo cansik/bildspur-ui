@@ -29,8 +29,8 @@ class ColorProperty(field: Field, obj: Any, val annotation: ColorParameter) : Ba
         }
         model.fireLatest()
 
-        colorPicker.setOnAction {
-            model.value = colorPicker.value.toRGB()
+        colorPicker.valueProperty().addListener { _, _, value ->
+            model.value = value.toRGB()
             propertyChanged(this)
         }
     }
