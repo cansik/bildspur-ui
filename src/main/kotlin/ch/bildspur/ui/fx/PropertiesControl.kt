@@ -1,17 +1,20 @@
 package ch.bildspur.ui.fx
 
 import ch.bildspur.event.Event
+import ch.bildspur.ui.properties.ParameterInformation
 import ch.bildspur.ui.properties.PropertyComponent
 import ch.bildspur.ui.properties.PropertyReader
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Label
+import javafx.scene.control.Tooltip
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.scene.text.Font
 
-class PropertiesControl(val reader : PropertyReader = PropertyReader(FXPropertyRegistry.properties)) : VBox() {
+
+class PropertiesControl(val reader: PropertyReader = PropertyReader(FXPropertyRegistry.properties)) : VBox() {
     val propertyChanged = Event<BaseFXProperty>()
 
     init {
@@ -32,7 +35,9 @@ class PropertiesControl(val reader : PropertyReader = PropertyReader(FXPropertyR
                     return@forEach
                 }
 
-                addProperty(it.name, it.property)
+                // find help parameter if available
+                val parameterHelp = it.field.getAnnotation(ParameterInformation::class.java)
+                addProperty(it.name, it.property, parameterHelp)
                 return@forEach
             }
         }
@@ -50,7 +55,7 @@ class PropertiesControl(val reader : PropertyReader = PropertyReader(FXPropertyR
         children.add(propertyView)
     }
 
-    private fun addProperty(name: String, propertyView: BaseFXProperty) {
+    private fun addProperty(name: String, propertyView: BaseFXProperty, parameterInformation: ParameterInformation?) {
         propertyView.propertyChanged += {
             propertyChanged(propertyView)
         }
@@ -59,6 +64,11 @@ class PropertiesControl(val reader : PropertyReader = PropertyReader(FXPropertyR
         nameLabel.prefWidth = 80.0
         nameLabel.font = Font("Helvetica", 12.0)
         nameLabel.isWrapText = true
+
+        if(parameterInformation != null) {
+            val t = Tooltip(parameterInformation.helpText)
+            nameLabel.tooltip = t
+        }
 
         HBox.setHgrow(propertyView, Priority.ALWAYS)
         HBox.setHgrow(nameLabel, Priority.ALWAYS)

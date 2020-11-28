@@ -28,7 +28,8 @@ class PropertyReader(val properties : MutableList<PropertiesRegistryEntry<*>> = 
             val annotation = field.getAnnotation(property.annotation!!)!!
             PropertyField(annotation,
                     property.getName(annotation),
-                    property.getPropertyControl(field, obj, annotation))
+                    property.getPropertyControl(field, obj, annotation),
+                    field)
         }
     }
 }

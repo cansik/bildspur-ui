@@ -72,6 +72,7 @@ class ConfigurationWindowTest {
         var extendedFeature = DataModel(true)
 
         @Expose
+        @ParameterInformation("Controls the light color of all LED tubes!")
         @ColorParameter("Sunset")
         var colorParameter = DataModel(RGB(0.2, 0.3, 0.1, 1.0))
 
