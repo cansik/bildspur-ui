@@ -44,7 +44,7 @@ class ConfigurationWindowTest {
         var temperature = DataModel(60)
 
         @Expose
-        @SliderParameter("Scale", 20.0, 80.0, 1.0, mapping = Mapping.Quad)
+        @SliderParameter("Scale", 20.0, 500000.0, 1.0, mapping = Mapping.Quad)
         var scale = DataModel(40.0)
 
         @Expose

@@ -20,7 +20,7 @@ class PropertiesControl(val reader: PropertyReader = PropertyReader(FXPropertyRe
     init {
         spacing = 10.0
         alignment = Pos.TOP_CENTER
-        padding = Insets(10.0, 20.0, 10.0, 20.0)
+        padding = Insets(10.0, 10.0, 10.0, 10.0)
     }
 
     fun initView(obj: Any) {

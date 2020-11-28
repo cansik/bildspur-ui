@@ -1,18 +1,17 @@
 package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
+import ch.bildspur.ui.fx.ResettableFXFieldProperty
 import ch.bildspur.ui.fx.controls.NumberField
+import ch.bildspur.ui.fx.styleValueLabel
 import ch.bildspur.ui.fx.utils.JavaFXUtils
 import ch.bildspur.ui.properties.NumberParameter
-import ch.bildspur.ui.fx.BaseFXFieldProperty
-import ch.bildspur.ui.fx.ResettableFXFieldProperty
 import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.control.TextFormatter
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
-import javafx.scene.text.Font
 import javafx.util.converter.NumberStringConverter
 import java.lang.reflect.Field
 import java.text.NumberFormat
@@ -30,7 +29,7 @@ class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : 
 
     init {
         format.isGroupingUsed = false
-        unitField.font = Font("Helvetica", 10.0)
+        unitField.styleValueLabel()
 
         val box = HBox(numberField)
         box.spacing = 10.0

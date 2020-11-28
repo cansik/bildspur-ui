@@ -3,13 +3,13 @@ package ch.bildspur.ui.fx.properties
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.properties.ProgressParameter
 import ch.bildspur.ui.fx.BaseFXFieldProperty
+import ch.bildspur.ui.fx.styleValueLabel
 import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
-import javafx.scene.text.Font
 import javafx.util.converter.NumberStringConverter
 import java.lang.reflect.Field
 import java.text.NumberFormat
@@ -29,7 +29,7 @@ class ProgressProperty(field: Field, obj: Any, val annotation: ProgressParameter
 
     init {
         format.isGroupingUsed = false
-        valueField.font = Font("Helvetica", 10.0)
+        valueField.styleValueLabel()
 
         box.spacing = 10.0
         box.alignment = Pos.CENTER_LEFT

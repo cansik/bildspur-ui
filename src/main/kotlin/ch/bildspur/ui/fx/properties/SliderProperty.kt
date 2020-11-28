@@ -2,6 +2,7 @@ package ch.bildspur.ui.fx.properties
 
 import ch.bildspur.model.DataModel
 import ch.bildspur.ui.fx.ResettableFXFieldProperty
+import ch.bildspur.ui.fx.styleValueLabel
 import ch.bildspur.ui.fx.utils.JavaFXUtils
 import ch.bildspur.ui.properties.SliderParameter
 import ch.bildspur.util.Mapping
@@ -40,6 +41,8 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter)
         } else {
             slider.isSnapToTicks = false
         }
+
+        valueLabel.styleValueLabel()
 
         slider.maxWidth = Double.MAX_VALUE
         setHgrow(slider, Priority.ALWAYS)
