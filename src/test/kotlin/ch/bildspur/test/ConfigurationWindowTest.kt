@@ -163,6 +163,10 @@ class ConfigurationWindowTest {
             }
             cfg.cities.fireLatest()
 
+            cfg.vertex.onChanged += {
+                println("Vertex: $it")
+            }
+
             val window = ConfigurationWindow(controller, "CWT", cfg)
             window.start(Stage())
         }
