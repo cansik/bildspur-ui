@@ -18,6 +18,7 @@ import java.lang.reflect.Field
 import java.text.NumberFormat
 import java.util.*
 
+@Suppress("UNCHECKED_CAST")
 class NumberProperty(field: Field, obj: Any, val annotation: NumberParameter) : ResettableFXFieldProperty<Number>(field, obj) {
 
     val format = NumberFormat.getInstance(Locale.ENGLISH)

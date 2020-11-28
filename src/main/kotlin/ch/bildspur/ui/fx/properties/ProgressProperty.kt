@@ -16,6 +16,7 @@ import java.text.NumberFormat
 import java.util.*
 import kotlin.math.round
 
+@Suppress("UNCHECKED_CAST")
 class ProgressProperty(field: Field, obj: Any, val annotation: ProgressParameter) : BaseFXFieldProperty(field, obj) {
 
     private val format = NumberFormat.getInstance(Locale.ENGLISH)

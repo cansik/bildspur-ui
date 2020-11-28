@@ -9,6 +9,7 @@ import javafx.scene.control.ListView
 import javafx.scene.layout.Priority
 import java.lang.reflect.Field
 
+@Suppress("UNCHECKED_CAST")
 class ListProperty (field: Field, obj: Any, annoation: ListParameter) : BaseFXFieldProperty(field, obj) {
     private val listView = ListView<String>()
     private val data : ObservableList<String> = FXCollections.observableArrayList()
