@@ -48,6 +48,10 @@ class ConfigurationWindowTest {
         var scale = DataModel(40.0)
 
         @Expose
+        @SliderParameter("Micro Scale", 0.001, 10.0, 0.001, mapping = Mapping.Quart)
+        var microScale = DataModel(1.0)
+
+        @Expose
         @RangeSliderParameter("Temperature Range", 0.0, 100.0, 1.0, true, true)
         var temperatureRange = DataModel(NumberRange(20.0, 80.0))
 
@@ -158,10 +162,6 @@ class ConfigurationWindowTest {
                 println("Cities Changed: ${cfg.cities.selectedIndex}")
             }
             cfg.cities.fireLatest()
-
-            cfg.scale.onChanged += {
-                println("Scale: ${cfg.scale}")
-            }
 
             val window = ConfigurationWindow(controller, "CWT", cfg)
             window.start(Stage())
