@@ -1,6 +1,6 @@
 package ch.bildspur.ui.properties
 
-import ch.bildspur.util.Easing
+import ch.bildspur.util.Mapping
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
@@ -19,7 +19,8 @@ annotation class SliderParameter(val name: String,
                                  val maxValue: Double = 100.0,
                                  val majorTick: Double = 1.0,
                                  val snap: Boolean = true,
-                                 val roundInt: Boolean = false)
+                                 val roundInt: Boolean = false,
+                                 val mapping : Mapping = Mapping.Linear)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)

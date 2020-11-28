@@ -29,7 +29,7 @@ dependencies {
 
 
     // base
-    compile "com.github.cansik:bildspur-base:0.2.6"
+    compile "com.github.cansik:bildspur-base:ef6673a586"
 
     // javafx
     compile group: 'org.openjfx', name: 'javafx-base', version: '11.0.2'

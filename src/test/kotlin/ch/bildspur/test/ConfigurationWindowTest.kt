@@ -11,7 +11,7 @@ import ch.bildspur.model.SelectableDataModel
 import ch.bildspur.ui.AppConfiguration
 import ch.bildspur.ui.fx.ConfigurationWindow
 import ch.bildspur.ui.properties.*
-import ch.bildspur.util.Easing
+import ch.bildspur.util.Mapping
 import com.google.gson.annotations.Expose
 import javafx.application.Platform
 import javafx.stage.Stage
@@ -44,8 +44,8 @@ class ConfigurationWindowTest {
         var temperature = DataModel(60)
 
         @Expose
-        @SliderParameter("Scale", 0.001, 10.0, 0.001, mapping = Easing.EaseInCubic)
-        var scale = DataModel(0.5f)
+        @SliderParameter("Scale", 20.0, 80.0, 1.0, mapping = Mapping.Quad)
+        var scale = DataModel(40.0)
 
         @Expose
         @RangeSliderParameter("Temperature Range", 0.0, 100.0, 1.0, true, true)
@@ -158,6 +158,10 @@ class ConfigurationWindowTest {
                 println("Cities Changed: ${cfg.cities.selectedIndex}")
             }
             cfg.cities.fireLatest()
+
+            cfg.scale.onChanged += {
+                println("Scale: ${cfg.scale}")
+            }
 
             val window = ConfigurationWindow(controller, "CWT", cfg)
             window.start(Stage())
