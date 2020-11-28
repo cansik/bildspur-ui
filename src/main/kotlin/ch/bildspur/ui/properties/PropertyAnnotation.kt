@@ -65,7 +65,7 @@ annotation class ColorParameter(val name: String)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class LabelParameter(val name: String)
+annotation class LabelParameter(val name: String, val fontSize : Double = 14.0)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)

@@ -62,7 +62,10 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
         settings.forEach { (annotation, cfg) ->
             val menuButton = ClickableMenu(annotation?.name
                     ?: cfg.javaClass.name)
-            menuButton.setOnAction { propertiesControl.initView(cfg) }
+            menuButton.setOnAction {
+                // todo: implement button selection to indicate
+                propertiesControl.initView(cfg)
+            }
             menuBar.menus.add(menuButton)
         }
 
