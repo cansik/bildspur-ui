@@ -70,7 +70,7 @@ class ConfigurationWindow(val configController : ConfigurationController, val ti
         }
 
         val scrollPane = ScrollPane(propertiesControl)
-        scrollPane.isFitToWidth = true;
+        scrollPane.isFitToWidth = true
         return BorderPane(scrollPane, menuBar, null, null, null)
     }
 

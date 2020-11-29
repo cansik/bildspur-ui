@@ -14,7 +14,7 @@ class LabelProperty (field: Field, obj: Any, annoation: LabelParameter) : BaseFX
 
     init {
         label.padding = Insets(10.0, 0.0, 0.0, 0.0)
-        label.font = Font.font("Helvetica", FontWeight.BOLD, 14.0)
+        label.font = Font.font("Helvetica", FontWeight.BOLD, annoation.fontSize)
         children.add(label)
     }
 }
