@@ -13,7 +13,8 @@ import javafx.scene.control.Slider
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 import java.lang.reflect.Field
-import kotlin.math.roundToLong
+import kotlin.math.max
+import kotlin.math.min
 
 @Suppress("UNCHECKED_CAST")
 class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter)
@@ -47,7 +48,7 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter)
         slider.maxWidth = Double.MAX_VALUE
         setHgrow(slider, Priority.ALWAYS)
 
-        val digits = if (model.value is Int || annotation.roundInt) 0 else 2
+        val digits = if (model.value is Int || annotation.roundInt) 0 else annotation.labelDigits
 
         val box = HBox(slider, valueLabel)
         box.spacing = 10.0
@@ -59,6 +60,7 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter)
                 silent = true
                 slider.value = model.value.toDouble().mapIn()
 
+                // todo: find better way to format number (more intelligent to show relevant digits)
                 if (model.value is Int || model.value is Long)
                     valueLabel.text = model.value.toString()
                 else
@@ -92,14 +94,18 @@ class SliderProperty(field: Field, obj: Any, val annotation: SliderParameter)
      */
     private fun Double.mapIn(): Double {
         val norm = (this - annotation.minValue) / valueRange
-        return annotation.mapping.inverseMapping(norm) * valueRange + annotation.minValue
+        return annotation.mapping.inverseMapping(norm).constrainToRange() * valueRange + annotation.minValue
     }
 
     /**
      * From eased range to linear outside
      */
     private fun Double.mapOut(): Double {
-        val mapped = annotation.mapping.mapping((this - annotation.minValue) / valueRange)
+        val mapped = annotation.mapping.mapping((this - annotation.minValue) / valueRange).constrainToRange()
         return (mapped * valueRange) + annotation.minValue
+    }
+
+    private fun Double.constrainToRange(): Double {
+        return min(max(0.0, this), 1.0)
     }
 }

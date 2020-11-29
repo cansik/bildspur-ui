@@ -52,6 +52,10 @@ class ConfigurationWindowTest {
         var microScale = DataModel(1.0)
 
         @Expose
+        @SliderParameter("Noise Speed", 0.0005, 0.1, 0.0001, mapping = Mapping.Quart, labelDigits = 4)
+        var noiseSpeed = DataModel(0.02f)
+
+        @Expose
         @RangeSliderParameter("Temperature Range", 0.0, 100.0, 1.0, true, true)
         var temperatureRange = DataModel(NumberRange(20.0, 80.0))
 
@@ -166,6 +170,10 @@ class ConfigurationWindowTest {
 
             cfg.vertex.onChanged += {
                 println("Vertex: $it")
+            }
+
+            cfg.noiseSpeed.onChanged += {
+                println("NoiseSpeed: $it")
             }
 
             val window = ConfigurationWindow(controller, "CWT", cfg)

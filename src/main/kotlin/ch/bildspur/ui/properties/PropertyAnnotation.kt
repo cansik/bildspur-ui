@@ -20,7 +20,8 @@ annotation class SliderParameter(val name: String,
                                  val majorTick: Double = 1.0,
                                  val snap: Boolean = true,
                                  val roundInt: Boolean = false,
-                                 val mapping : Mapping = Mapping.Linear)
+                                 val mapping : Mapping = Mapping.Linear,
+                                 val labelDigits : Int = 2)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
