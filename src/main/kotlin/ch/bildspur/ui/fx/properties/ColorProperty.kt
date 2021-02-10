@@ -30,8 +30,10 @@ class ColorProperty(field: Field, obj: Any, val annotation: ColorParameter) : Ba
         model.fireLatest()
 
         colorPicker.valueProperty().addListener { _, _, value ->
-            model.value = value.toRGB()
-            propertyChanged(this)
+            preventFirstTime {
+                model.value = value.toRGB()
+                propertyChanged(this)
+            }
         }
     }
 }

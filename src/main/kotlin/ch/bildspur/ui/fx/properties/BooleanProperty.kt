@@ -40,8 +40,10 @@ class BooleanProperty(field: Field, obj: Any, annotation: BooleanParameter) : Ba
         model.fireLatest()
 
         selectableComponent.selectedProperty.addListener { _, _, value ->
-            model.value = value
-            propertyChanged(this)
+            preventFirstTime {
+                model.value = value
+                propertyChanged(this)
+            }
         }
     }
 }
