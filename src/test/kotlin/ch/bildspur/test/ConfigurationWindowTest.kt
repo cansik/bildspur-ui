@@ -172,6 +172,14 @@ class ConfigurationWindowTest {
                 println("Vertex: $it")
             }
 
+            cfg.heating.onChanged += {
+                println("Heating changed: $it")
+            }
+
+            cfg.extendedFeature.onChanged += {
+                println("Extended feature changed: $it")
+            }
+
             cfg.noiseSpeed.onChanged += {
                 println("NoiseSpeed: $it")
             }
