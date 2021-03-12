@@ -9,6 +9,7 @@ import ch.bildspur.model.ListDataModel
 import ch.bildspur.model.NumberRange
 import ch.bildspur.model.SelectableDataModel
 import ch.bildspur.ui.AppConfiguration
+import ch.bildspur.ui.fx.BaseFXFieldProperty
 import ch.bildspur.ui.fx.ConfigurationWindow
 import ch.bildspur.ui.properties.*
 import ch.bildspur.util.Mapping
@@ -72,8 +73,18 @@ class ConfigurationWindowTest {
         var heating = DataModel(true)
 
         @Expose
+        @BooleanParameter("Cooling")
+        var cooling = DataModel(false)
+
+
+        @Expose
         @BooleanParameter("Extended Feature", useToggleSwitch = true)
-        var extendedFeature = DataModel(true)
+        var extendedFeature = DataModel(false)
+
+        @Expose
+        @BooleanParameter("New Feature", useToggleSwitch = true)
+        var newFeature = DataModel(true)
+
 
         @Expose
         @ParameterInformation("Controls the light color of all LED tubes!")
@@ -172,19 +183,18 @@ class ConfigurationWindowTest {
                 println("Vertex: $it")
             }
 
-            cfg.heating.onChanged += {
-                println("Heating changed: $it")
-            }
-
-            cfg.extendedFeature.onChanged += {
-                println("Extended feature changed: $it")
-            }
-
             cfg.noiseSpeed.onChanged += {
                 println("NoiseSpeed: $it")
             }
 
             val window = ConfigurationWindow(controller, "CWT", cfg)
+            window.propertiesControl.propertyChanged += {
+                var addText = ""
+                if (it is BaseFXFieldProperty) {
+                    addText = it.field.name
+                }
+                println("WINDOW property changed: $it $addText")
+            }
             window.start(Stage())
         }
     }

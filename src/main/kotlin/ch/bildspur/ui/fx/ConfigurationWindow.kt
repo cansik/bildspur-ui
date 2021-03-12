@@ -12,7 +12,7 @@ import javafx.stage.Screen
 import javafx.stage.Stage
 
 class ConfigurationWindow(val configController : ConfigurationController, val title : String, val rootConfiguration: Any) : Application() {
-    private val propertiesControl = PropertiesControl()
+    val propertiesControl = PropertiesControl()
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = title
