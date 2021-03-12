@@ -16,6 +16,7 @@ import ch.bildspur.util.Mapping
 import com.google.gson.annotations.Expose
 import javafx.application.Platform
 import javafx.stage.Stage
+import java.nio.file.Paths
 
 fun main() {
     ConfigurationWindowTest().runConfigWindow()
@@ -85,6 +86,9 @@ class ConfigurationWindowTest {
         @BooleanParameter("New Feature", useToggleSwitch = true)
         var newFeature = DataModel(true)
 
+        @Expose
+        @PathParameter("Readme Path", extensions = ["*.md"])
+        var readmePath = DataModel(Paths.get("README.md"))
 
         @Expose
         @ParameterInformation("Controls the light color of all LED tubes!")

@@ -20,6 +20,7 @@ object FXPropertyRegistry {
         properties.add(PropertiesRegistryEntry(EnumParameter::class.java, EnumParameter::name, ::EnumProperty))
         properties.add(PropertiesRegistryEntry(ColorParameter::class.java, ColorParameter::name, ::ColorProperty))
         properties.add(PropertiesRegistryEntry(ListParameter::class.java, ListParameter::name, ::ListProperty))
+        properties.add(PropertiesRegistryEntry(PathParameter::class.java, PathParameter::name, ::PathProperty))
         properties.add(PropertiesRegistryEntry(SelectableListParameter::class.java, SelectableListParameter::name, ::SelectableListProperty))
 
         properties.add(PropertiesRegistryEntry(LabelParameter::class.java, LabelParameter::name, ::LabelProperty))

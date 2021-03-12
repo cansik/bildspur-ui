@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'ch.bildspur'
-version '0.4.0'
+version '0.4.1'
 
 def name = 'bildspur-ui'
 sourceCompatibility = 1.8
@@ -29,7 +29,7 @@ dependencies {
 
 
     // base
-    compile "com.github.cansik:bildspur-base:-SNAPSHOT"
+    compile "com.github.cansik:bildspur-base:0.3.5"
 
     // javafx
     compile group: 'org.openjfx', name: 'javafx-base', version: '11.0.2'

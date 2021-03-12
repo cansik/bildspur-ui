@@ -1,5 +1,6 @@
 package ch.bildspur.ui.properties
 
+import ch.bildspur.ui.fx.utils.FileChooserDialogMode
 import ch.bildspur.util.Mapping
 
 @Target(AnnotationTarget.FIELD)
@@ -79,3 +80,14 @@ annotation class ListParameter(val name: String, val height : Double = 100.0)
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class SelectableListParameter(val name: String)
+
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class PathParameter(val name: String,
+                               val title: String = "Open",
+                               val mode : FileChooserDialogMode = FileChooserDialogMode.Open,
+                               val initialDirectory : String = "",
+                               val initialFileName: String = "",
+                               val extensions : Array<String> = [],
+                               val relativizePath : Boolean = true,
+                               val isEditable: Boolean = true)
