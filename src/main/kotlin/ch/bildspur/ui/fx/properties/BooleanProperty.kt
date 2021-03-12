@@ -41,7 +41,14 @@ class BooleanProperty(field: Field, obj: Any, annotation: BooleanParameter) : Ba
 
         selectableComponent.selectedProperty.addListener { _, _, value ->
             model.value = value
-            propertyChanged(this)
+
+            preventFirstTime {
+                propertyChanged(this)
+            }
         }
+
+        // hacky way to skip first time set
+        if (!model.value)
+            isSetup = true
     }
 }
