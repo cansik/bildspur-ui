@@ -102,6 +102,7 @@ class PathProperty(field: Field, obj: Any, val annotation: PathParameter) : Base
                 }
 
                 model.value = path
+                propertyChanged(this)
             }
         }
     }
