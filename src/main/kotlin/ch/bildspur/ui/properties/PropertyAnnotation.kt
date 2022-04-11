@@ -55,7 +55,7 @@ annotation class Float3Parameter(val name: String)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ActionParameter(val name: String, val caption: String, val invokesChange : Boolean = true)
+annotation class ActionParameter(val name: String, val caption: String, val invokesChange : Boolean = true, val uiThread: Boolean = false)
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)

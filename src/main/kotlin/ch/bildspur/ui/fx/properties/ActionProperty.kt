@@ -38,25 +38,33 @@ class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : 
             val storedCursor = cursor
             cursor = Cursor.WAIT
 
-            thread {
-                try {
-                    block()
-                } catch (ex : Exception) {
-                    errorText.isVisible = true
-                    errorText.text = "${ex.message}"
-                } finally {
-                    Platform.runLater {
-                        cursor = storedCursor
-                        button.isDisable = false
-                        progress.isVisible = false
-                        if (annotation.invokesChange)
-                            propertyChanged.invoke(this)
-                    }
+            if(annotation.uiThread) {
+                invoke(block, storedCursor)
+            } else {
+                thread(isDaemon = true) {
+                    invoke(block, storedCursor)
                 }
             }
         }
 
         box.spacing = 10.0
         children.add(box)
+    }
+
+    private fun invoke(block: () -> Unit, storedCursor: Cursor?) {
+        try {
+            block()
+        } catch (ex : Exception) {
+            errorText.isVisible = true
+            errorText.text = "${ex.message}"
+        } finally {
+            Platform.runLater {
+                cursor = storedCursor
+                button.isDisable = false
+                progress.isVisible = false
+                if (annotation.invokesChange)
+                    propertyChanged.invoke(this)
+            }
+        }
     }
 }
