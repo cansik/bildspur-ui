@@ -10,18 +10,25 @@ import javafx.scene.layout.Priority
 import java.lang.reflect.Field
 
 
-class SelectableListProperty (field: Field, obj: Any, annoation: SelectableListParameter) : BaseFXFieldProperty(field, obj) {
+class SelectableListProperty (field: Field, obj: Any, annotation: SelectableListParameter) : BaseFXFieldProperty(field, obj) {
     private val box = ComboBox<String>()
     private val data : ObservableList<String> = FXCollections.observableArrayList()
     private var preventUpdate = false
 
     init {
+        val instance = this
         val model = field.get(obj) as SelectableDataModel<Any>
         box.items = data
         model.onChanged += {
             if(!preventUpdate) {
                 data.setAll(model.map { e -> e.toString() })
+
+                box.isDisable = data.size == 0
                 box.selectionModel.select(model.selectedIndex)
+
+                preventFirstTime {
+                    propertyChanged(instance)
+                }
             }
         }
         model.fireLatest()

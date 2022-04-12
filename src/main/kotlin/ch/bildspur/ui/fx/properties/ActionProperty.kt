@@ -57,6 +57,7 @@ class ActionProperty(field: Field, obj: Any, val annotation: ActionParameter) : 
         } catch (ex : Exception) {
             errorText.isVisible = true
             errorText.text = "${ex.message}"
+            ex.printStackTrace()
         } finally {
             Platform.runLater {
                 cursor = storedCursor
