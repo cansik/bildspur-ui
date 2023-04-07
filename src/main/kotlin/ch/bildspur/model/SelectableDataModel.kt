@@ -17,6 +17,8 @@ class SelectableDataModel<T>(items: MutableList<T> = mutableListOf(), @Expose pr
     var selectedIndex: Int
         get() = index
         set(value) {
+            if (value == this.index)
+                return
             this.index = value
             this.fire()
         }

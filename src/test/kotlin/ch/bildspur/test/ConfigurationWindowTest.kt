@@ -118,6 +118,11 @@ class ConfigurationWindowTest {
             println("done!")
         }
 
+        @ActionParameter("List", "Test", false)
+        var listTest = {
+            cities.selectedIndex = 2
+        }
+
         @Expose
         @ListParameter("Users")
         var userList = ListDataModel(mutableListOf("Max", "Tim", "Florian"))

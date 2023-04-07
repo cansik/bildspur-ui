@@ -6,10 +6,10 @@ plugins {
 }
 
 group 'ch.bildspur'
-version '0.4.4'
+version '0.4.5'
 
 def name = 'bildspur-ui'
-sourceCompatibility = 1.8
+sourceCompatibility = 1.9
 
 repositories {
     mavenCentral()
@@ -87,3 +87,4 @@ publishing {
         }
     }
 }
+targetCompatibility = JavaVersion.VERSION_1_9

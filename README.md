@@ -1,4 +1,4 @@
-# bildspur UI [![Build Status](https://travis-ci.org/cansik/bildspur-ui.svg?branch=master)](https://travis-ci.org/cansik/bildspur-ui)
+# bildspur UI
 A library with ui components for creative applications in kotlin.
 
 ### Install
@@ -9,6 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation "com.github.cansik:bildspur-ui:0.3.1"
+    implementation "com.github.cansik:bildspur-ui:0.4.5"
 }
 ```
