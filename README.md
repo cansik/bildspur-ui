@@ -1,5 +1,5 @@
 # bildspur UI
-A library with ui components for creative applications in kotlin.
+A library with ui components for creative applications in kotlin. Based on [bildspur-base](https://github.com/cansik/bildspur-base).
 
 ### Install
 
@@ -9,6 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation "com.github.cansik:bildspur-ui:0.4.5"
+    implementation "com.github.cansik:bildspur-ui:0.4.6"
 }
 ```

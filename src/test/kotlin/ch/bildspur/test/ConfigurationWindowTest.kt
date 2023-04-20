@@ -11,12 +11,14 @@ import ch.bildspur.model.SelectableDataModel
 import ch.bildspur.ui.AppConfiguration
 import ch.bildspur.ui.fx.BaseFXFieldProperty
 import ch.bildspur.ui.fx.ConfigurationWindow
+import ch.bildspur.ui.fx.utils.FileChooserDialogMode
 import ch.bildspur.ui.properties.*
 import ch.bildspur.util.Mapping
 import com.google.gson.annotations.Expose
 import javafx.application.Platform
 import javafx.stage.Stage
 import java.nio.file.Paths
+import kotlin.io.path.Path
 
 fun main() {
     ConfigurationWindowTest().runConfigWindow()
@@ -89,6 +91,10 @@ class ConfigurationWindowTest {
         @Expose
         @PathParameter("Readme Path", extensions = ["*.md"])
         var readmePath = DataModel(Paths.get("README.md"))
+
+        @Expose
+        @PathParameter("Asset Dir", mode = FileChooserDialogMode.OpenDirectory)
+        var assetDir = DataModel(Path(""))
 
         @Expose
         @ParameterInformation("Controls the light color of all LED tubes!")
@@ -194,6 +200,10 @@ class ConfigurationWindowTest {
 
             cfg.noiseSpeed.onChanged += {
                 println("NoiseSpeed: $it")
+            }
+
+            cfg.colorParameter.onChanged += {
+                println("Color changed to: $it")
             }
 
             val window = ConfigurationWindow(controller, "CWT", cfg)

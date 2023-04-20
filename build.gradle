@@ -1,12 +1,12 @@
 plugins {
     id 'java-library'
-    id "org.jetbrains.kotlin.jvm" version "1.6.10"
+    id "org.jetbrains.kotlin.jvm" version "1.8.0"
     id 'maven-publish'
-    id 'org.openjfx.javafxplugin' version '0.0.12'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 group 'ch.bildspur'
-version '0.4.5'
+version '0.4.6'
 
 def name = 'bildspur-ui'
 sourceCompatibility = 1.9
